@@ -1,8 +1,12 @@
 <%= turbo_stream_from @post %>
 
+<article class="post" >
+  <%= render @post %>  
+</article>
+
+
 <p style="color: green"><%= notice %></p>
 
-<%= render @post %>
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
@@ -11,4 +15,4 @@
   <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
 
- <%= render "comments/comments", post: @post %>
+

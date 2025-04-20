@@ -23,7 +23,133 @@
   </head>
 
   <body>
-    <%= button_to "Sign out", session_path, method: :delete if authenticated? %>
-    <%= yield %>
+    
+   
+    <!-- Header Section -->
+    <header>
+        <h1>Modern Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
+        
+        <!-- Left Sidebar - User Information -->
+        <aside class="left-sidebar">
+            <div class="user-profile">
+                <img class="profile-image" src="https://www.claudeusercontent.com/api/placeholder/100/100" alt="User Profile">
+                <h3 class="user-name">Jane Smith</h3>
+                <p class="user-bio">Web designer, photographer, and coffee enthusiast</p>
+            </div>
+            <div class="user-stats">
+                <div class="stat">
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Posts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Followers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">89</div>
+                    <div class="stat-label">Following</div>
+                </div>
+                <%= button_to "Sign out", session_path, method: :delete if authenticated? %>
+            </div>
+        </aside>
+        <main class="main-content">
+          <article class="post">
+            <%= yield %>
+          </article>  
+        </main>
+
+       
+
+        <!-- Right Sidebar - Related Content and News -->
+        <aside class="right-sidebar">
+            <div class="related-content">
+                <h3 class="section-title">Related Posts</h3>
+                <div class="related-posts">
+                    <div class="related-post">
+                        <img class="related-post-img" src="/api/placeholder/60/60" alt="Related Post">
+                        <div class="related-post-content">
+                            <h4 class="related-post-title">Mastering CSS Variables</h4>
+                            <div class="related-post-date">March 28, 2025</div>
+                        </div>
+                    </div>
+                    <div class="related-post">
+                        <img class="related-post-img" src="/api/placeholder/60/60" alt="Related Post">
+                        <div class="related-post-content">
+                            <h4 class="related-post-title">The Power of SVG Animations</h4>
+                            <div class="related-post-date">March 20, 2025</div>
+                        </div>
+                    </div>
+                    <div class="related-post">
+                        <img class="related-post-img" src="/api/placeholder/60/60" alt="Related Post">
+                        <div class="related-post-content">
+                            <h4 class="related-post-title">Modern JavaScript Techniques</h4>
+                            <div class="related-post-date">March 15, 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news">
+                <h3 class="section-title">Latest News</h3>
+                <div class="news-items">
+                    <div class="news-item">
+                        <h4 class="news-title">Chrome Releases Major Update for Developers</h4>
+                        <div class="news-source">Web Dev Today - April 18, 2025</div>
+                    </div>
+                    <div class="news-item">
+                        <h4 class="news-title">New CSS Features Coming This Summer</h4>
+                        <div class="news-source">CSS Tricks - April 12, 2025</div>
+                    </div>
+                    <div class="news-item">
+                        <h4 class="news-title">The Rise of AI in Web Development</h4>
+                        <div class="news-source">Tech Insights - April 5, 2025</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">About</h3>
+                <p>Modern Blog is a platform dedicated to sharing insights and news about web development, design, and technology.</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Connect</h3>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">LI</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Modern Blog. All rights reserved.
+        </div>
+    </footer>
   </body>
 </html>

@@ -1,4 +1,49 @@
-<div id="<%= dom_id(comment)%>">
-    <%= comment.content %>
-    <%= time_tag comment.updated_at, "data-local": "time-ago" %>
-</div>
+
+<div id="<%= dom_id(comment)%>" class="comment">
+        <img class="comment-avatar" src="https://www.claudeusercontent.com/api/placeholder/50/50" alt="User">
+        <div class="comment-body">
+            <div class="comment-header">
+                <h4 class="comment-author">Alex Johnson</h4>
+                <span class="comment-time"> <%= time_tag comment.updated_at, "data-local": "time-ago" %></span>
+            </div>
+            <p class="comment-text"><%= comment.content %></p>
+            <div class="comment-actions">
+                <span class="comment-action">Like (12)</span>
+                <span class="comment-action">Reply</span>
+                <span class="comment-action">Share</span>
+            </div>
+            
+            <!-- Nested Comments >
+            <div class="comment-responses">
+                <div class="nested-comment">
+                    <img class="nested-avatar" src="/api/placeholder/35/35" alt="User">
+                    <div class="comment-body">
+                        <div class="comment-header">
+                            <h4 class="comment-author">Jane Smith</h4>
+                            <span class="comment-time">1 hour ago</span>
+                        </div>
+                        <p class="comment-text">Thanks Alex! I'm glad you found it helpful. Which aspects are you implementing in your projects?</p>
+                        <div class="comment-actions">
+                            <span class="comment-action">Like (3)</span>
+                            <span class="comment-action">Reply</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="nested-comment">
+                    <img class="nested-avatar" src="/api/placeholder/35/35" alt="User">
+                    <div class="comment-body">
+                        <div class="comment-header">
+                            <h4 class="comment-author">Alex Johnson</h4>
+                            <span class="comment-time">45 min ago</span>
+                        </div>
+                        <p class="comment-text">I'm working on a portfolio site and trying to incorporate those gradient borders with subtle animations you mentioned. Really makes the UI feel more alive!</p>
+                        <div class="comment-actions">
+                            <span class="comment-action">Like (2)</span>
+                            <span class="comment-action">Reply</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-->
+        </div>
+    </div>

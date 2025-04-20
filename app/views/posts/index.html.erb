@@ -1,8 +1,10 @@
+<%= turbo_stream_from Post %>
+
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Posts" %>
 
-<h1>Posts</h1>
+
 
 <div id="posts">
   <% @posts.each do |post| %>
