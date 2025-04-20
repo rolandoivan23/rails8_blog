@@ -61,7 +61,7 @@
                     <div class="stat-number">89</div>
                     <div class="stat-label">Following</div>
                 </div>
-                <%= button_to "Sign out", session_path, method: :delete if authenticated? %>
+                <%= button_to "Sign out", session_path, class: 'signout-btn', method: :delete if authenticated? %>
             </div>
         </aside>
         <main class="main-content">

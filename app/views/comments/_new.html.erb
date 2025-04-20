@@ -3,7 +3,7 @@
         
         <%= form.text_area :content, class: 'comment-input', rows: 4, placeholder: 'Share your thoughts...' %>
         <div class="comment-form-footer">
-            <%= form.submit 'Post Comment', class: 'comment-submit' %>
+            <button class="comment-submit" style="margin-left: auto;"><%= form.submit 'Post Comment', class: 'comment-submit', style: "padding-left: 0.5rem;padding-top: 0px;padding-bottom: 0px;padding-right: 0.5rem;" %></button>
         </div>
 
     <% end %>
