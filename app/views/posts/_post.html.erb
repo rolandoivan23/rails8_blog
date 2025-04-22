@@ -1,33 +1,38 @@
 
-    <div class="post-content">
-        <h2 class="post-title"><%= post.title %></h2>
-        <%= post.body %>
-        <div class="post-meta">
-            <span class="post-author">By Jane Smith</span>
-            <span class="post-date">
-              <%= time_tag post.updated_at, "data-local": "time", "data-format": "%Y %B" %>
+<div class="post-content">
+    <h2 class="post-title"><%= post.title %></h2>
+    <%= post.body %>
+    <div class="post-meta">
+        <span class="post-author">By Jane Smith</span>
+        <span class="post-date">
+          <%= time_tag post.updated_at, "data-local": "time", "data-format": "%Y %B" %>
+        </span>
+        <div class="post-tags">
+          <% post.categories.each do |category| %>
+            <span class="tag">
+              <%= category.name %>
             </span>
-            <div class="post-tags">
-                <span class="tag">Design</span>
-                <span class="tag">Web</span>
-            </div>
+          <% end %>
         </div>
-        <p class="post-excerpt">
-            As we approach the mid-2020s, web design continues evolving at a rapid pace. This year, we're seeing an unprecedented fusion of minimalist aesthetics with dynamic functionality, creating experiences that are both visually striking and highly interactive.
-        </p>
-
-        <% if post.comments %>
-          <!-- Comments Section -->
-          <div class="comments-section">
-            <div class="comments-header">
-                <h3 class="comments-title">Comments</h3>
-                <span class="comments-count">24</span>
-            </div>
-            
-            
-                      
-            <%= render "comments/comments", post: post %>
-          </div>
-        <% end %>
-        <a href="#" class="read-more">Read More</a>
     </div>
+    <p class="post-excerpt">
+        As we approach the mid-2020s, web design continues evolving at a rapid pace. This year, we're seeing an unprecedented fusion of minimalist aesthetics with dynamic functionality, creating experiences that are both visually striking and highly interactive.
+    </p>
+
+    <% if post.comments %>
+      <!-- Comments Section -->
+      <div class="comments-section">
+        <div class="comments-header">
+            <h3 class="comments-title">Comments</h3>
+            <span class="comments-count">
+              <%= post.comments.size %>
+            </span>
+        </div>
+        
+        
+                  
+        <%= render "comments/comments", post: post %>
+      </div>
+    <% end %>
+    <a href="#" class="read-more">Read More</a>
+</div>
