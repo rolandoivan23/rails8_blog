@@ -57,8 +57,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_22_021652) do
   end
 
   create_table "categories_posts", id: false, force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "category_id", null: false
+    t.integer "post_id"
+    t.integer "category_id"
     t.index ["category_id"], name: "index_categories_posts_on_category_id"
     t.index ["post_id"], name: "index_categories_posts_on_post_id"
   end
@@ -97,8 +97,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_22_021652) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories_posts", "categories"
-  add_foreign_key "categories_posts", "posts"
   add_foreign_key "comments", "posts"
   add_foreign_key "sessions", "users"
 end
