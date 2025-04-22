@@ -1,0 +1,161 @@
+<% content_for :head do %>
+  <style>
+    body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    line-height: 1.6;
+    }
+
+    header {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    }
+
+    header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    }
+
+    header p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    }
+
+    .contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    }
+
+    .info-section,
+    .form-section {
+    flex: 1 1 400px;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 1.5rem;
+    }
+
+    .info-section a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+    }
+
+    .info-section a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+    }
+
+    ul {
+    padding-left: 1.2rem;
+    }
+
+    .form-group {
+    margin-bottom: 1.5rem;
+    }
+
+    label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    }
+
+    input,
+    textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    input:focus,
+    textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    outline: none;
+    }
+
+    button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    }
+
+    button:hover {
+    background-color: #db2777;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    }
+    </style>
+<% end %>
+
+
+  <header>
+    <h1>Rolando Vázquez</h1>
+    <p>Ruby on Rails Developer</p>
+  </header>
+
+  <div class="contact-container">
+    <section class="info-section">
+      <h2>📬 Contact Info</h2>
+      <p><strong>Email:</strong> rolando.vazquez.23</p>
+      <p><strong>Company:</strong> <a href="https://mexclouds.com" target="_blank">mexclouds.com</a></p>
+      <p><strong>Personal Site:</strong> <a href="https://mrcodiguitos.cloud" target="_blank">mrcodiguitos.cloud</a></p>
+      <p><strong>Projects:</strong></p>
+      <ul>
+        <li><a href="https://rubygems.org/gems/acts_as_realtime" target="_blank">acts_as_realtime</a></li>
+        <li><a href="https://tiempo.com.mx" target="_blank">tiempo.com.mx</a></li>
+        <li><a href="https://mexclouds.bolecom.com" target="_blank">mexclouds.bolecom.com</a></li>
+      </ul>
+    </section>
+
+    <section class="form-section">
+      <h2>📨 Send a Message</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Your full name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="How can I help you?"></textarea>
+        </div>
+
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
