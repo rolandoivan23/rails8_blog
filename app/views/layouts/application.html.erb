@@ -30,10 +30,10 @@
         <h1>Modern Blog</h1>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><%= link_to 'Home', root_path %></li>
                 <li><a href="#">Categories</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><%= link_to 'About', contact_index_path %></li>
+                <li><%= link_to 'Contact', contact_index_path %></li>
             </ul>
         </nav>
     </header>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :categories
+  get "contact/index"
   resource :session
   resources :passwords, param: :token
   resources :posts do
