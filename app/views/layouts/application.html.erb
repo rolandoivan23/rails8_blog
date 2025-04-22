@@ -44,13 +44,25 @@
         <!-- Left Sidebar - User Information -->
         <aside class="left-sidebar">
             <div class="user-profile">
-                <img class="profile-image" src="https://www.claudeusercontent.com/api/placeholder/100/100" alt="User Profile">
-                <h3 class="user-name">Jane Smith</h3>
-                <p class="user-bio">Web designer, photographer, and coffee enthusiast</p>
+                <% if current_user.avatar.attached? %>
+                    <%= image_tag current_user.avatar %>
+                <% else %>
+                    <img class="profile-image" src="https://www.claudeusercontent.com/api/placeholder/100/100" alt="User Profile">
+                <% end %>
+                <h3 class="user-name"><%= current_user.email_address %></h3>
+                
+                <p class="user-bio">
+                    <% if current_user.presentation %>
+                        <%= current_user.presentation %>
+                    <% else %>
+                        Web designer, photographer, and coffee enthusiast :)
+                    <% end %>
+                </p>
+                
             </div>
             <div class="user-stats">
                 <div class="stat">
-                    <div class="stat-number">42</div>
+                    <div class="stat-number"><%= current_user.posts.count %></div>
                     <div class="stat-label">Posts</div>
                 </div>
                 <div class="stat">
