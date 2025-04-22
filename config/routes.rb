@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bulletins
   resources :categories
   get "contact/index"
   resource :session

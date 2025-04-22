@@ -89,45 +89,28 @@
             <div class="related-content">
                 <h3 class="section-title">Related Posts</h3>
                 <div class="related-posts">
-                    <div class="related-post">
-                        <img class="related-post-img" src="/api/placeholder/60/60" alt="Related Post">
-                        <div class="related-post-content">
-                            <h4 class="related-post-title">Mastering CSS Variables</h4>
-                            <div class="related-post-date">March 28, 2025</div>
+                    <% Post.last(3).each do |post| %>
+                        <div class="related-post">
+                            <%= image_tag post.hero_image, class: 'related-post-img', alt: 'Related Post' if post.hero_image.attached? %>
+                            <div class="related-post-content">
+                                <h4 class="related-post-title"> <%= post.title %> </h4>
+                                <div class="related-post-date"><%= time_tag post.created_at, "data-local": "time", "data-format": "%Y %B" %></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="related-post">
-                        <img class="related-post-img" src="/api/placeholder/60/60" alt="Related Post">
-                        <div class="related-post-content">
-                            <h4 class="related-post-title">The Power of SVG Animations</h4>
-                            <div class="related-post-date">March 20, 2025</div>
-                        </div>
-                    </div>
-                    <div class="related-post">
-                        <img class="related-post-img" src="/api/placeholder/60/60" alt="Related Post">
-                        <div class="related-post-content">
-                            <h4 class="related-post-title">Modern JavaScript Techniques</h4>
-                            <div class="related-post-date">March 15, 2025</div>
-                        </div>
-                    </div>
+                    <% end %>
+                    
                 </div>
             </div>
 
             <div class="news">
                 <h3 class="section-title">Latest News</h3>
                 <div class="news-items">
-                    <div class="news-item">
-                        <h4 class="news-title">Chrome Releases Major Update for Developers</h4>
-                        <div class="news-source">Web Dev Today - April 18, 2025</div>
-                    </div>
-                    <div class="news-item">
-                        <h4 class="news-title">New CSS Features Coming This Summer</h4>
-                        <div class="news-source">CSS Tricks - April 12, 2025</div>
-                    </div>
-                    <div class="news-item">
-                        <h4 class="news-title">The Rise of AI in Web Development</h4>
-                        <div class="news-source">Tech Insights - April 5, 2025</div>
-                    </div>
+                    <% Bulletin.all.each do |bulletin| %>
+                        <div class="news-item">
+                            <h4 class="news-title"><%= bulletin.title %></h4>
+                            <div class="news-source"><%= bulletin.source %> - <%= time_tag bulletin.created_at, "data-local": "time", "data-format": "%Y %B" %></div>
+                        </div>
+                    <% end %>
                 </div>
             </div>
         </aside>
