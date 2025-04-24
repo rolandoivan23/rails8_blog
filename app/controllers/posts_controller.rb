@@ -1,9 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-
+  skip_forgery_protection
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+    respond_to do |format|
+      format.js { render inline: 'alert("helo")', local: false }
+    end
   end
 
   # GET /posts/1 or /posts/1.json

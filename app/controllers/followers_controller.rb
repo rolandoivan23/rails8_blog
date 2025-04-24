@@ -1,6 +1,6 @@
 class FollowersController < ApplicationController
   before_action :set_follower, only: %i[ show edit update destroy ]
-
+  skip_forgery_protection
   # GET /followers or /followers.json
   def index
     @followers = Follower.all
@@ -54,6 +54,15 @@ class FollowersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to followers_path, status: :see_other, notice: "Follower was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def follow_user
+    FollowingUser.create! user: current_user, following_user_id: 3 # params[:user_to_follow_id]
+    respond_to do |format|
+      format.html { render inline: "Hola" }
+      format.js {  render inline: 'alert("I am here again")' }
+      format.json { render inline: User.all.to_json }
     end
   end
 

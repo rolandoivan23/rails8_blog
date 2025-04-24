@@ -82,11 +82,32 @@
           </article>  
         </main>
 
-       
+    
+       <script>
+        async function hi(){
+            const url = "http://localhost:3000/posts.js";
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+                }
+
+                const json = await response;
+                console.log(json);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+       </script>
 
         <!-- Right Sidebar - Related Content and News -->
         <aside class="right-sidebar">
             <div class="related-content">
+                <%= form_with model:Follower.new, data: {local: false} do |f| %>
+                    <%= f.submit%>
+                <% end  %>
+                <%= link_to 'aaa', add_following_path(:js), turbo: false%>
+                <%= button_to   add_following_path(:js), {action: "follow_user"}, {remote: true}%>
                 <h3 class="section-title">Related Posts</h3>
                 <div class="related-posts">
                     <% Post.last(3).each do |post| %>
