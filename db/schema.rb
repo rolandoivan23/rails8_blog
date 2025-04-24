@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_22_080145) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_24_032248) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -79,6 +79,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_22_080145) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
+  create_table "followers", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "follower_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_followers_on_user_id"
+  end
+
+  create_table "following_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "following_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_following_users_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -109,6 +125,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_22_080145) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
+  add_foreign_key "followers", "users"
+  add_foreign_key "following_users", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "sessions", "users"
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :following_users
+  resources :followers
   resources :bulletins
   resources :categories
   get "contact/index"
