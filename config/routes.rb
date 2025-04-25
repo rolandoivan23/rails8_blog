@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :categories
   get "contact/index"
   resource :session
+  resources :users
   resources :passwords, param: :token
   resources :posts do
     resources :comments
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
+  match "follow_user", to: "users#follow_user", via: [ :post ]
   # Defines the root path route ("/")
   root "posts#index"
 end

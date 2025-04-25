@@ -9,6 +9,7 @@
 #   end
 
 User.create! email_address: 'rolando.vazquez@hey.com', password: '123pum'
+User.create! email_address: 'another@hey.com', password: '123pum'
 
 Category.create! name: "Ruby on Rails", description: "The first category related to ruby on rails framework"
 

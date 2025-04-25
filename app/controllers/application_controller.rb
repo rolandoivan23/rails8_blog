@@ -7,11 +7,10 @@ class ApplicationController < ActionController::Base
 
   private
     def set_current_user
-      # Current.user = User.find_by(id: session[:user_id]) if session[:user_id]
-      User.first
+      Current.session.user if authenticated?
     end
 
     def current_user
-      User.first
+      Current.session.user if authenticated?
     end
 end

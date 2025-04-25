@@ -1,0 +1,36 @@
+<script>
+    async function follow_user(user_id){
+        const url = "/follow_user.json";
+        try {
+            var token = document.querySelector('meta[name="csrf-token"]').content
+
+            const response = await fetch(url, {
+                method: "POST",
+                body:JSON.stringify({user_id: user_id}),
+                headers: {
+                    'X-CSRF-Token': token,
+                    'Content-Type': 'application/json',  // Important! Tell Rails to parse as JSON
+                    'Accept': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                alert('Hubo un error con el servidor')
+            throw new Error(`Response status is: ${response.status}`);
+            }
+
+            const json = await response;
+            console.log(json)
+            let following_counter = document.querySelector('#following-counter');
+            following_counter.innerHTML = parseInt(following_counter.innerHTML) + 1;
+            
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+</script>
+<% @users.each do %>
+    <h1> <%= it.email_address %> </h1> 
+    <% unless it.id == current_user.id or current_user.following_users_users.include?(it) %>
+        <span onclick="follow_user(<%= it.id %>)">Follow</span> 
+    <% end %>
+<%end %>
