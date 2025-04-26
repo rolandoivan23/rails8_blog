@@ -3,7 +3,7 @@ class FollowingUsersController < ApplicationController
 
   # GET /following_users or /following_users.json
   def index
-    @following_users = FollowingUser.all
+    @following_users = current_user.following_users_users
   end
 
   # GET /following_users/1 or /following_users/1.json

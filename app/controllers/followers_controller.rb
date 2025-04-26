@@ -3,7 +3,7 @@ class FollowersController < ApplicationController
 
   # GET /followers or /followers.json
   def index
-    @followers = Follower.all
+    @followers = current_user.followers
   end
 
   # GET /followers/1 or /followers/1.json
