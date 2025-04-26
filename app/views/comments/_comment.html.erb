@@ -1,7 +1,7 @@
 
 <div id="<%= dom_id(comment)%>" class="comment">
         <% if current_user.avatar.attached? %>
-            <%= image_tag current_user.avatar %>
+            <%= image_tag current_user.avatar, class: "comment-avatar" %>
         <% else %>
             <img class="comment-avatar" src="https://www.claudeusercontent.com/api/placeholder/50/50" alt="User">
         <% end %>

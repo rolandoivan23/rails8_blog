@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_one_attached :avatar
   has_many :sessions, dependent: :destroy
   has_many :posts
   has_many :followers, foreign_key: :follower_id

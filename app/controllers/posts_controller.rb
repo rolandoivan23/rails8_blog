@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_categories, only: [ :new, :edit, :create, :update ]
 
   # GET /posts or /posts.json
   def index
@@ -63,8 +64,12 @@ class PostsController < ApplicationController
       @post = Post.find(params.expect(:id))
     end
 
+    def set_categories
+      @categories = Category.all
+    end
+
     # Only allow a list of trusted parameters through.
     def post_params
-      params.expect(post: [ :title, :body, :hero_image ])
+      params.expect(post: [ :title, :body, :hero_image, category_ids: [] ])
     end
 end

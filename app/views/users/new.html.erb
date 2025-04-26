@@ -13,6 +13,10 @@
     </div>
 
     <div>
+        <%= form.file_field :avatar, accept: "image/*" %>
+    </div>
+
+    <div>
         <%= form.submit 'Guardar' %>
     </div>
 <% end %>

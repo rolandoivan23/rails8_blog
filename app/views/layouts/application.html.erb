@@ -47,7 +47,7 @@
         <% if authenticated? %>
             <div class="user-profile">
                 <% if current_user and current_user.avatar.attached? %>
-                    <%= image_tag current_user.avatar %>
+                    <%= image_tag current_user.avatar, class: "profile-image" %>
                 <% else %>
                     <img class="profile-image" src="https://www.claudeusercontent.com/api/placeholder/100/100" alt="User Profile">
                 <% end %>
@@ -76,7 +76,8 @@
                     <div id="following-counter" class="stat-number"><%= current_user.following_users.size if current_user %></div>
                     <div class="stat-label">Following</div>
                 </div>
-                <%= button_to "Sign out", session_path, class: 'signout-btn', method: :delete if authenticated? %>
+                <%= button_to "Sign out", session_path, method: :delete if authenticated? %>
+                <%= link_to "New Post", new_post_path, class: 'signout-btn' %>
             </div>
         <% else %>
             <%= link_to 'Login', new_session_path, class: 'button' %>

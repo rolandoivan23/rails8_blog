@@ -24,6 +24,19 @@
         <%= form.file_field :hero_image, accept: "image/*" %>
 
   </div>
+
+  <div class="field categories-field">
+    <h3>Categories</h3>
+    <div class="categories-container">
+      <%= form.collection_check_boxes :category_ids, @categories, :id, :name do |cb| %>
+        <div class="category-checkbox">
+          <%= cb.check_box %>
+          <%= cb.label %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
   <div>
     <%= form.submit %>
   </div>
