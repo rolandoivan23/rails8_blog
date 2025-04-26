@@ -179,6 +179,7 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 900px;
 }
 
 .post {
@@ -570,3 +571,31 @@ footer {
     animation: pulse 0.5s;
   }
   
+  .follow-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border:none;
+    border-radius:6px;
+    padding:8px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+    background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap:5px;
+  }
+
+  .follow-btn:hover {
+    background-color: #3b5bd9;
+  }
+  
+  .following-btn {
+    background-color: #e0e7ff;
+    color: var(--primary-color);
+  }
+  
+  .following-btn:hover {
+    background-color: #d3deff;
+  }

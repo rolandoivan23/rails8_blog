@@ -34,16 +34,17 @@
                 <li><%= link_to 'People', users_path %></li>
                 <li><%= link_to 'Categories', categories_path %></li>
                 <li><%= link_to 'About', contact_index_path %></li>
-                <li><%= link_to 'Contact', contact_index_path %></li>
+                <li><%= link_to 'Contact', contact_contact_path %></li>
             </ul>
         </nav>
     </header>
 
+    
     <!-- Main Content Wrapper -->
     <div class="content-wrapper">
-        
         <!-- Left Sidebar - User Information -->
         <aside class="left-sidebar">
+        <% if authenticated? %>
             <div class="user-profile">
                 <% if current_user and current_user.avatar.attached? %>
                     <%= image_tag current_user.avatar %>
@@ -61,6 +62,7 @@
                 </p>
                 
             </div>
+        
             <div class="user-stats">
                 <div class="stat">
                     <div class="stat-number"><%= current_user.posts.count if current_user %></div>
@@ -76,7 +78,12 @@
                 </div>
                 <%= button_to "Sign out", session_path, class: 'signout-btn', method: :delete if authenticated? %>
             </div>
+        <% else %>
+            <%= link_to 'Login', new_session_path, class: 'button' %>
+            <%= link_to 'Sign Up', new_session_path, class: 'button' %>
+        <% end %>
         </aside>
+        
         <main class="main-content">
           <article class="post">
             <%= yield %>

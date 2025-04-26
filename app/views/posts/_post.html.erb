@@ -1,7 +1,7 @@
 
 <div class="post-content">
     <h2 class="post-title"><%= post.title %></h2>
-    <%= image_tag post.hero_image if post.hero_image.attached? %>
+    
     <div class="post-meta">
         <span class="post-author">
           <%= current_user.email_address %>
@@ -17,6 +17,7 @@
           <% end %>
         </div>
     </div>
+    <%= image_tag post.hero_image, style: 'max-width: 100%' if post.hero_image.attached? %>
     <%= post.body %>
     <p class="post-excerpt">
         As we approach the mid-2020s, web design continues evolving at a rapid pace. This year, we're seeing an unprecedented fusion of minimalist aesthetics with dynamic functionality, creating experiences that are both visually striking and highly interactive.

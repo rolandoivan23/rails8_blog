@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :bulletins
   resources :categories
   get "contact/index"
+  get "contact/contact"
   resource :session
   resources :users
   resources :passwords, param: :token

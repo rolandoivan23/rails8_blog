@@ -357,14 +357,14 @@
     <button class="filter-btn" data-filter="trending">Trending</button>
   </div>
   
-  <div class="categories-collage">
+  <div class="categories">
     <!-- Large featured category -->
     <% Category.all.each do |category| %>
-      <div class="category-item <%= ['featured', 'medium', 'small', 'large'].sample %>" style="background-image: url('<%= url_for(category.image) if category.image.attached? %>')">
+      <div class="category <%= ['featured', 'medium', 'small', 'large'].sample %>" style="background-image: url('<%= url_for(category.image) if category.image.attached? %>')">
         
-        <div class="category-overlay"></div>
-        <div class="category-content">
-          <h3 class="category-title"><%= category.name %></h3>
+        <div class="category-head"></div>
+        <div class="category-cont">
+          <h3 class="category-name"><%= category.name %></h3>
           <p class="category-count">47 Articles</p>
         
         </div>
@@ -377,61 +377,69 @@
   </div>
 </div>
 
-<%= content_for :head do %>
+<%= content_for :headd do %>
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to clicked button
-        this.classList.add('active');
-        
-        // Here you would typically filter the categories
-        // For demonstration, just adding a visual feedback
-        const filterType = this.getAttribute('data-filter');
-        
-        // Animation for items to show filter effect
-        const allItems = document.querySelectorAll('.category-item');
-        allItems.forEach(item => {
-          item.style.opacity = '0.4';
-          setTimeout(() => {
-            item.style.opacity = '1';
-          }, 300);
+    document.addEventListener('DOMContentLoaded', function() {
+
+       setTimeout(()=>{
+        const  filterButtons = document.querySelectorAll('.filter-btn');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Here you would typically filter the categories
+          // For demonstration, just adding a visual feedback
+          const filterType = this.getAttribute('data-filter');
+          
+          // Animation for items to show filter effect
+          const allItems = document.querySelectorAll('.category-item');
+          allItems.forEach(item => {
+            item.style.opacity = '0.4';
+            setTimeout(() => {
+              item.style.opacity = '1';
+            }, 300);
+          });
         });
       });
+      
+      // Animation for categories when they come into view
+      if ('IntersectionObserver' in window) {
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-in');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, options);
+        
+        document.querySelectorAll('.category-item').forEach(item => {
+          observer.observe(item);
+        });
+      } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        document.querySelectorAll('.category-item').forEach(item => {
+          item.classList.add('animate-in');
+        });
+      }
+
+
+
+       }, 1000)
+      
     });
-    
-    // Animation for categories when they come into view
-    if ('IntersectionObserver' in window) {
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      };
-      
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, options);
-      
-      document.querySelectorAll('.category-item').forEach(item => {
-        observer.observe(item);
-      });
-    } else {
-      // Fallback for browsers that don't support IntersectionObserver
-      document.querySelectorAll('.category-item').forEach(item => {
-        item.classList.add('animate-in');
-      });
-    }
-  });
+   
 </script>    
 <% end %>
 
