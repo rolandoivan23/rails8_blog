@@ -47,13 +47,16 @@
         <% if authenticated? %>
             <div class="user-profile">
                 <% if current_user and current_user.avatar.attached? %>
-                    <%= image_tag current_user.avatar, class: "profile-image" %>
+                    <%=link_to user_path(current_user) do %>
+                        <%= image_tag current_user.avatar, class: "profile-image" %>
+                    <%end%>
                 <% else %>
                     <img class="profile-image" src="https://www.claudeusercontent.com/api/placeholder/100/100" alt="User Profile">
                 <% end %>
                 <h3 class="user-name"><%= current_user.email_address if current_user %></h3>
                 
                 <p class="user-bio">
+                    <h1>Un cambio</h1>
                     <% if current_user and current_user.presentation %>
                         <%= current_user.presentation %>
                     <% else %>
