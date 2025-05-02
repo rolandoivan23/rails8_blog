@@ -7,6 +7,7 @@
 <div id="following_users">
   <% @following_users.each do |following_user| %>
     <%= following_user.email_address %>
+    <%= following_user.presentation %>
     <p>
       <%= link_to "Show this following user", following_user %>
     </p>

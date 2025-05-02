@@ -4,7 +4,7 @@
     
     <div class="post-meta">
         <span class="post-author">
-          <%= current_user.email_address %>
+          <%= post.user.email_address %>
         </span>
         <span class="post-date">
           <%= time_tag post.updated_at, "data-local": "time", "data-format": "%Y %B" %>
@@ -18,9 +18,8 @@
         </div>
     </div>
     <%= image_tag post.hero_image, style: 'max-width: 100%' if post.hero_image.attached? %>
-    <%= post.body %>
     <p class="post-excerpt">
-        As we approach the mid-2020s, web design continues evolving at a rapid pace. This year, we're seeing an unprecedented fusion of minimalist aesthetics with dynamic functionality, creating experiences that are both visually striking and highly interactive.
+      <%= post.body %>
     </p>
 
     <% if post.comments %>
@@ -32,8 +31,6 @@
               <%= post.comments.size %>
             </span>
         </div>
-        
-        
                   
         <%= render "comments/comments", post: post %>
       </div>

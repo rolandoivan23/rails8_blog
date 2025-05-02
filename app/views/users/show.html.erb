@@ -1,1 +1,24 @@
-mi perfil
+<div class="user-profile">
+  <div class="user-header">
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, class: "avatar" %>
+    <% else %>
+      <div class="avatar-placeholder"><%= @user.email_address.upcase %></div>
+    <% end %>
+    <h1><%=  @user.email_address %></h1>
+  </div>
+
+  <div class="user-posts">
+    <h2>Posts (<%= @user.posts.count %>)</h2>
+    
+    <% if @user.posts.any? %>
+      <div class="posts-container">
+        <%= render partial: "posts/post", collection: @user.posts %>
+      </div>
+    <% else %>
+      <div class="no-posts">
+        <p>Este usuario aún no ha publicado ningún post.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

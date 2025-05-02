@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  allow_unauthenticated_access only: %i[ index ]
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :set_categories, only: [ :new, :edit, :create, :update ]
 

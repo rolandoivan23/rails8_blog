@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: %i[ new create ]
+  allow_unauthenticated_access only: %i[ new create index ]
 
   def index
     @users = User.all
@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
     # GET /users/1 or /users/1.json
     def show
+      @user = current_user
     end
 
     # GET /users/new

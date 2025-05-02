@@ -29,17 +29,28 @@
     }
 </script>
 <% @users.each do %>
-    <h1> <%= it.email_address %> </h1> 
-    <% unless it.id == current_user.id or current_user.following_users_users.include?(it) %>
-        <div class="user-actions">
-                <button class="follow-btn" onclick="follow_user(<%= it.id %>)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c0-.001-.001-.048-.064-.208-.303-.631-1.497-1.788-4.936-1.788-3.432 0-4.627 1.148-4.935 1.788-.063.16-.064.207-.064.208z"></path>
-                    <path d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
-                    </svg>
-                    Follow
-                </button>
-                <div class="user-meta">Joined: <%= it.created_at.strftime("%b %Y") %></div>
-        </div>        
-    <% end %>
+    <div class="user-index-page">
+        <div class="user-list-container">
+            <ul class="user-list">
+                <li class="user-item">
+                    <div class="user-info-basic">
+                        <span><%= image_tag it.avatar, class: "comment-avatar" if it.avatar.attached?  %></span>
+                        <span><%= it.email_address %></span>
+                        <p><%= it.presentation %></p>
+                        </div>
+                    <div class="user-buttons">
+                        <button class="follow-btn" onclick="follow_user(<%= it.id %>)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c0-.001-.001-.048-.064-.208-.303-.631-1.497-1.788-4.936-1.788-3.432 0-4.627 1.148-4.935 1.788-.063.16-.064.207-.064.208z"></path>
+                            <path d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+                            </svg>
+                            Follow
+                        </button>
+                        <div class="user-meta">Joined: <%= it.created_at.strftime("%b %Y") %></div>
+                    
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 <%end %>
