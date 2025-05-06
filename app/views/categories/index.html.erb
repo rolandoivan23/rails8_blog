@@ -148,23 +148,35 @@
   <h1 class="categories-title">Explore Categories</h1>
   
   <div class="categories-filter">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="popular">Popular</button>
-    <button class="filter-btn" data-filter="recent">Recent</button>
-    <button class="filter-btn" data-filter="trending">Trending</button>
+    <%= link_to categories_path do %>
+      <button class="filter-btn <%= 'active' if @tag == 'all' %>" data-filter="all">All</button>
+    <% end %>
+    <%= link_to categories_path(tag: 'Popular') do %>
+      <button class="filter-btn <%= 'active' if @tag == 'popular' %>" data-filter="popular">Popular</button>
+    <% end %>
+    <%= link_to categories_path(tag: 'Recent') do %>
+      <button class="filter-btn <%= 'active' if @tag == 'recent' %>" data-filter="recent">Recent</button>
+    <% end %>
+    <%= link_to categories_path(tag: 'Trending') do %>
+      <button class="filter-btn" data-filter="trending">Trending</button>
+    <% end %>
   </div>
 
   <div class="container">
       <div class="categories-grid">
-            <% Category.all.each do |category| %>
-              <div class="category-card">
-                <div class="category-icon" >
-                  <i class="fas fa-laptop-code"></i>
-                  </div>
-                <h3 class="category-title"><%= category.name %></h3>
-                <div class="post-count"><%= category.posts.count %> artículos</div>
-              </div>
-            <% end %>  
+        <% if @categories.size > 0 %>
+          <% @categories.each do |category| %>
+            <div class="category-card">
+              <div class="category-icon" >
+                <i class="fas fa-laptop-code"></i>
+                </div>
+              <h3 class="category-title"><%= category.name %></h3>
+              <div class="post-count"><%= category.posts.count %> artículos</div>
+            </div>
+          <% end %>  
+        <% else %>
+          <strong>No categories found</strong>
+        <% end %>
       </div>
   </div>
     

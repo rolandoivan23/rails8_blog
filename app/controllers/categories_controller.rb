@@ -3,7 +3,13 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    if params[:tag].present?
+      @categories = Category.joins(:tags).where(tags: { name: params[:tag] })
+      @tag = params[:tag]
+    else
+      @tag = "all"
+      @categories = Category.all
+    end
   end
 
   # GET /categories/1 or /categories/1.json
@@ -65,6 +71,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.expect(category: [ :name, :description, :image ])
+      params.expect(category: [ :name, :description, :image, tag_ids: [] ])
     end
 end

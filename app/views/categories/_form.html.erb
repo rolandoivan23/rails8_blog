@@ -23,7 +23,14 @@
 
   <div>
         <%= form.file_field :image, accept: "image/*" %>
+  </div>
 
+  <div>
+    <%= form.label :tag_ids, 'Tags' %>
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |b| %>
+      <%= b.check_box %>
+      <%= b.label { b.object.name } %>
+    <% end %>
   </div>
 
   <div>
