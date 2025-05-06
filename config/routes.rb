@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  # resources :contacts
   resources :following_users
   resources :followers
   resources :bulletins
   resources :categories
   get "contact/index"
-  get "contact/contact"
+  match "contact/new", to: "contact#new", via: [ :get ]
+  post "/submit_contact_form", to: "contact#create"
   resource :session
   resources :users
   resources :passwords, param: :token

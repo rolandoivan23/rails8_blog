@@ -124,26 +124,40 @@
   </header>
 
   <div class="contact-container">
- 
     <section class="form-section">
       <h2>📨 Send a Message</h2>
-      <form>
+      <%= form_for(@contact, url: '/submit_contact_form' ) do |form| %>
         <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" placeholder="Your full name" />
+          <%= form.label :name, 'Your name' %>
+          <%= form.text_field :name, id: 'name', placeholder: 'Your full name' %>
+          <% if @contact.errors.present? && @contact.errors.messages[:name].present? %>
+            <div class="error">
+              <%= @contact.errors.messages[:name].join(', ') %>
+            </div>
+          <% end %>
         </div>
 
         <div class="form-group">
-          <label for="email">Your Email</label>
-          <input type="email" id="email" placeholder="you@example.com" />
+          <%= form.label :mail, 'Your Email' %>
+          <%= form.email_field :mail, id: 'email', placeholder: 'you@example.com' %>
+          <% if @contact.errors.present? && @contact.errors.messages[:mail].present? %>
+            <div class="error">
+              <%= @contact.errors.messages[:mail].join(', ') %>
+            </div>
+          <% end %>
         </div>
 
         <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" rows="5" placeholder="How can I help you?"></textarea>
+          <%= form.label :message %>
+          <%= form.text_area :message, id: 'message', rows: 5, placeholder: 'How can I help you?' %>
+          <% if @contact.errors.present? && @contact.errors.messages[:message].present? %>
+            <div class="error">
+              <%= @contact.errors.messages[:message].join(', ') %>
+            </div>
+          <% end %>
         </div>
 
-        <button type="submit">Send</button>
-      </form>
+        <%= form.submit 'Send' %>
+      <% end %>
     </section>
   </div>
