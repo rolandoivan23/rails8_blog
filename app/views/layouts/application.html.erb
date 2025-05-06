@@ -27,7 +27,7 @@
    
     <!-- Header Section -->
     <header>
-        <h1>Modern Blog</h1>
+        <h1>Rolando's Blog</h1>
         <nav>
             <ul>
                 <li><%= link_to 'Home', root_path %></li>
@@ -101,14 +101,16 @@
             <div class="related-content">
                 <h3 class="section-title">Related Posts</h3>
                 <div class="related-posts">
-                    <% Post.last(3).each do |post| %>
-                        <div class="related-post">
-                            <%= image_tag post.hero_image, class: 'related-post-img', alt: 'Related Post' if post.hero_image.attached? %>
-                            <div class="related-post-content">
-                                <h4 class="related-post-title"> <%= post.title %> </h4>
-                                <div class="related-post-date"><%= time_tag post.created_at, "data-local": "time", "data-format": "%Y %B" %></div>
+                    <% get_related_posts.each do |post| %>
+                        <%= link_to post, style: "text-decoration: none;" do %>
+                            <div class="related-post">
+                                <%= image_tag post.hero_image, class: 'related-post-img', alt: 'Related Post' if post.hero_image.attached? %>
+                                <div class="related-post-content">
+                                    <h4 class="related-post-title"> <%= post.title %> </h4>
+                                    <div class="related-post-date"><%= time_tag post.created_at, "data-local": "time", "data-format": "%Y %B" %></div>
+                                </div>
                             </div>
-                        </div>
+                        <% end %>
                     <% end %>
                     
                 </div>
@@ -117,11 +119,13 @@
             <div class="news">
                 <h3 class="section-title">Latest News</h3>
                 <div class="news-items">
-                    <% Bulletin.all.each do |bulletin| %>
-                        <div class="news-item">
-                            <h4 class="news-title"><%= bulletin.title %></h4>
-                            <div class="news-source"><%= bulletin.source %> - <%= time_tag bulletin.created_at, "data-local": "time", "data-format": "%Y %B" %></div>
-                        </div>
+                    <% Bulletin.last(3).each do |bulletin| %>
+                        <%= link_to bulletin, style: 'text-decoration: none;' do %>
+                            <div class="news-item">
+                                <h4 class="news-title"><%= bulletin.title %></h4>
+                                <div class="news-source"><%= bulletin.source %> - <%= time_tag bulletin.created_at, "data-local": "time", "data-format": "%Y %B" %></div>
+                            </div>
+                        <% end%>
                     <% end %>
                 </div>
             </div>
@@ -133,7 +137,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3 class="footer-title">About</h3>
-                <p>Modern Blog is a platform dedicated to sharing insights and news about web development, design, and technology.</p>
+                <p>Rolando's Blog is a platform dedicated to sharing insights and news about web development, design, and technology.</p>
             </div>
             <div class="footer-section">
                 <h3 class="footer-title">Quick Links</h3>
