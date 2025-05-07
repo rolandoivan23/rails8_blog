@@ -20,11 +20,46 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   </head>
 
-  <body>
+  <body onload="init();">
     
-   
+    <script>
+      
+     function debug(string) {
+      let element = document.getElementById("users");
+      let p = document.createElement("p");
+      p.appendChild(document.createTextNode(string));
+      if(element)
+        element.appendChild(p);
+    }
+    function init() {
+      var Socket = "MozWebSocket" in window ? MozWebSocket : WebSocket;
+      var ws = new WebSocket("ws://localhost:8098");
+      ws.onmessage = function(evt) { 
+        console.log('onmessage')
+        if(evt){
+          eval(evt.data);  
+        }else{
+          console.log('POr algina razon')
+        }
+      };
+      ws.onclose = function(evt) {
+          console.log('onclose')
+          console.log(evt)
+          //debug("Received: " + evt.data);
+      };
+      ws.onopen = function(e) {
+        console.log('onopen console');
+        console.log(e)
+        //ws.send("Hola desde el cliente");
+      }
+    };
+
+
+    </script>
     <!-- Header Section -->
     <header>
         <h1>Rolando's Blog</h1>

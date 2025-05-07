@@ -28,10 +28,13 @@
         }
     }
 </script>
+
+
+
 <% @users.each do %>
-    <div class="user-index-page">
+    <div class="user-index-page" >
         <div class="user-list-container">
-            <ul class="user-list">
+            <ul id="users" class="user-list">
                 <li class="user-item">
                     <div class="user-info-basic">
                         <span><%= image_tag it.avatar, class: "comment-avatar" if it.avatar.attached?  %></span>
