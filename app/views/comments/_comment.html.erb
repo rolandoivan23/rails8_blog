@@ -12,7 +12,25 @@
             </div>
             <p class="comment-text"><%= comment.content %></p>
             <div class="comment-actions">
-                <span class="comment-action">Like (12)</span>
+                <script>
+                    function updateLikes(commentId) {
+                        const commentElementId = `comment_${commentId}_likes`;
+                        const commentElement = document.getElementById(commentElementId);
+                        let currentLikes = commentElement.innerHTML;
+                        currentLikes = currentLikes.replace('(', '');
+                        currentLikes = currentLikes.replace(')', '');
+            
+                        if (commentElement) {
+                            const newLikes = parseInt(currentLikes) + 1;
+                            commentElement.innerHTML = `(${newLikes})`;
+                        } else {
+                            console.error(`No se encontró el elemento con ID: ${commentElementId}`);
+                        }
+                    }
+                </script>
+                <span class="comment-action" onclick="updateLikes(<%= comment.id%>)">
+                    Like <span id="<%= dom_id(comment) %>_likes">(<%= comment.likes %>)</span>
+                </span>
                 <span class="comment-action">Reply</span>
                 <span class="comment-action">Share</span>
             </div>
