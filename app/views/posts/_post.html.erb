@@ -7,7 +7,7 @@
           <%= post.user.email_address %>
         </span>
         <span class="post-date">
-          <%= time_tag post.updated_at, "data-local": "time", "data-format": "%Y %B" %>
+          <%= time_tag post.updated_at, "data-local": "time", "data-format": "%d %B %Y" %>
         </span>
         <div class="post-tags">
           <% post.categories.each do |category| %>
@@ -21,19 +21,26 @@
     <p class="post-excerpt">
       <%= post.body %>
     </p>
-
-    <% if post.comments %>
-      <!-- Comments Section -->
-      <div class="comments-section">
-        <div class="comments-header">
-            <h3 class="comments-title">Comments</h3>
-            <span class="comments-count">
-              <%= post.comments.size %>
-            </span>
-        </div>
-                  
-        <%= render "comments/comments", post: post %>
-      </div>
-    <% end %>
     <a href="#" class="read-more">Read More</a>
+
+    
+    <!-- Comments Section -->
+    <div class="comments-section">
+      <div class="comments-header">
+          <h3 class="comments-title">Comments</h3>
+          <span class="comments-count">
+            <%= post.comments.size %>
+          </span>
+      </div>
+      <% if post.comments.size > 0 %>             
+        <div style="margin-bottom: 1.5rem;">
+          <%= render "comments/comments", post: post %>
+        </div> 
+      <% end %>
+    </div>
+    
+    <p>
+      <%= render "comments/new", post: post %>
+    </p>
+  
 </div>
