@@ -167,9 +167,10 @@
         <% if @categories.size > 0 %>
           <% @categories.each do |category| %>
             <div class="category-card">
+              <%= image_tag category.image.variant(:thumb) if category.image.attached? %>
               <div class="category-icon" >
                 <i class="fas fa-laptop-code"></i>
-                </div>
+              </div>
               <h3 class="category-title"><%= category.name %></h3>
               <div class="post-count"><%= category.posts.count %> artículos</div>
             </div>

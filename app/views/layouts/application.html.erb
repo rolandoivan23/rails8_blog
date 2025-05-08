@@ -48,7 +48,7 @@
             <div class="user-profile">
                 <% if current_user.avatar.attached? %>
                     <%=link_to user_path(current_user) do %>
-                        <%= image_tag current_user.avatar, class: "profile-image" %>
+                        <%= image_tag current_user.avatar.variant(:thumb), class: "profile-image" %>
                     <%end%>
                 <% else %>
                     <img class="profile-image" src="https://www.claudeusercontent.com/api/placeholder/100/100" alt="User Profile">
@@ -103,7 +103,7 @@
                     <% get_related_posts.each do |post| %>
                         <%= link_to post, style: "text-decoration: none;" do %>
                             <div class="related-post">
-                                <%= image_tag post.hero_image, class: 'related-post-img', alt: 'Related Post' if post.hero_image.attached? %>
+                                <%= image_tag post.hero_image.variant(:thumb), class: 'related-post-img', style: "height: fit-content", alt: 'Related Post' if post.hero_image.attached? %>
                                 <div class="related-post-content">
                                     <h4 class="related-post-title"> <%= post.title %> </h4>
                                     <div class="related-post-date"><%= time_tag post.created_at, "data-local": "time", "data-format": "%Y %B" %></div>
