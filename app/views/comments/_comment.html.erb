@@ -44,6 +44,7 @@
 
                             const json = await response;
                             console.log(json)
+                            
                            
                             
                         } catch (error) {
@@ -53,8 +54,39 @@
                         } else {
                             console.error(`No se encontró el elemento con ID: ${commentElementId}`);
                         }
+                    }
 
-                        
+                    async function destroyComment(commentId,postId) {
+                       
+                        const url = `/posts/${postId}/comments/${commentId}.json`;
+                        try {
+                            var token = document.querySelector('meta[name="csrf-token"]').content
+
+                            const response = await fetch(url, {
+                                method: "DELETE",
+                                headers: {
+                                    'X-CSRF-Token': token,
+                                    'Content-Type': 'application/json',  // Important! Tell Rails to parse as JSON
+                                    'Accept': 'application/json'
+                                }
+                            });
+                            if (!response.ok) {
+                                alert('Hubo un error con el servidor')
+                            throw new Error(`Response status is: ${response.status}`);
+                            }
+
+                            const json = await response;
+                            console.log(json)
+                           const commentElement = document.getElementById(`comment_${commentId}`);
+                           commentElement.remove();
+                           const commentsCount = document.getElementById(`post_${postId}_comments_count`);
+                           commentsCount.innerHTML = parseInt(commentsCount.innerHTML) - 1; 
+                            
+                        } catch (error) {
+                            console.error(error.message);
+                        }
+
+                       
                     }
                 </script>
                 <span class="comment-action" onclick="updateLikes(<%= comment.id%>, <%= comment.post.id %>)">
@@ -62,6 +94,7 @@
                 </span>
                 <span class="comment-action">Reply</span>
                 <span class="comment-action">Share</span>
+                <span class="comment-action" onClick="destroyComment(<%= comment.id%>, <%= comment.post.id %>)">Delete</span>
             </div>
             
             <!-- Nested Comments >

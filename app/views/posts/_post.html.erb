@@ -28,7 +28,7 @@
     <div class="comments-section">
       <div class="comments-header">
           <h3 class="comments-title">Comments</h3>
-          <span class="comments-count">
+          <span id="<%= dom_id(post) %>_comments_count" class="comments-count">
             <%= post.comments.size %>
           </span>
       </div>
