@@ -8,7 +8,14 @@ class CommentsController < ApplicationController
     end
 
     def update
+        if params[:comment][:likes] != nil and @comment.likes != params[:comment][:likes].to_i
+            if CommentsLike.where(comment_id: params[:id], user_id: params[:user_id]).size > 0
+              render json: { error: "El usuario ya había dado like a este comentario." }, status: :conflict
+              return
+            end
+        end
         if @comment.update(comment_params)
+            CommentsLike.create!(comment: @comment, user_id: params[:user_id])
           respond_to do |format|
             format.json { render json: @comment } # Responde con el comentario actualizado en JSON
           end

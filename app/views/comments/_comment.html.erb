@@ -22,7 +22,6 @@
                             currentLikes = currentLikes.replace(')', '');
             
                             const newLikes = parseInt(currentLikes) + 1;
-                            commentElement.innerHTML = `(${newLikes})`;
 
                             const url = `/posts/${postId}/comments/${commentId}.json`;
                         try {
@@ -30,22 +29,21 @@
 
                             const response = await fetch(url, {
                                 method: "PATCH",
-                                body:JSON.stringify({comment: {likes: newLikes}}),
+                                body:JSON.stringify({comment: {likes: newLikes}, user_id: <%= current_user.id %>}),
                                 headers: {
                                     'X-CSRF-Token': token,
                                     'Content-Type': 'application/json',  // Important! Tell Rails to parse as JSON
                                     'Accept': 'application/json'
                                 }
                             });
+                            const json = await response.json();
+                            //console.log(json)
                             if (!response.ok) {
-                                alert('Hubo un error con el servidor')
+                                alert(json.error)
                             throw new Error(`Response status is: ${response.status}`);
-                            }
-
-                            const json = await response;
-                            console.log(json)
+                            }                            
+                            commentElement.innerHTML = `(${newLikes})`;
                             
-                           
                             
                         } catch (error) {
                             console.error(error.message);
