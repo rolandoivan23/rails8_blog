@@ -3,19 +3,19 @@ class CommentsController < ApplicationController
     before_action :set_comment, only: [ :update, :destroy ]
 
     def create
-        @post.comments.create! params.expect(comment: [ :content ])
+        @post.comments.create! params.expect(comment: [ :content ]).merge(user: current_user)
         redirect_to @post
     end
 
     def update
         if params[:comment][:likes] != nil and @comment.likes != params[:comment][:likes].to_i
-            if CommentsLike.where(comment_id: params[:id], user_id: params[:user_id]).size > 0
+            if CommentsLike.where(comment_id: params[:id], user_id: current_user.id).size > 0
               render json: { error: "El usuario ya había dado like a este comentario." }, status: :conflict
               return
             end
         end
         if @comment.update(comment_params)
-            CommentsLike.create!(comment: @comment, user_id: params[:user_id])
+            CommentsLike.create!(comment: @comment, user_id: current_user.id)
           respond_to do |format|
             format.json { render json: @comment } # Responde con el comentario actualizado en JSON
           end
