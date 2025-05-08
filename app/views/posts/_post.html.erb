@@ -19,9 +19,14 @@
     </div>
     <%= image_tag post.hero_image, style: 'max-width: 100%' if post.hero_image.attached? %>
     <p class="post-excerpt">
-      <%= post.body %>
+      <% plain_text = post.body.to_plain_text %>
+      <% if controller.action_name == 'index' and plain_text.length > 700 %>
+        <%= "#{plain_text[0..700]} . . . . . . . " %>
+      <% else %>
+        <%= post.body %>
+      <% end %>
     </p>
-    <a href="#" class="read-more">Read More</a>
+    <a href="<%= post_path(post) %>" class="read-more">Read More</a>
 
     
     <!-- Comments Section -->
