@@ -145,8 +145,11 @@
 
 </style>
 <div class="categories-container">
-  <h1 class="categories-title">Explore Categories</h1>
-  
+  <h1 class="categories-title">Explore Categories
+    <%= link_to new_category_path do %>
+      <button class="filter-btn">+ </button>
+    <% end %>
+  </h1>
   <div class="categories-filter">
     <%= link_to categories_path do %>
       <button class="filter-btn <%= 'active' if @tag == 'all' %>" data-filter="all">All</button>
