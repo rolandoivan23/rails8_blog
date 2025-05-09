@@ -101,7 +101,6 @@ nav a:hover {
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
-    width: 100%;
 }
 
 /* Left Sidebar - User Info */
@@ -245,7 +244,9 @@ nav a:hover {
     margin: 1rem 0;
     line-height: 1.6;
     color: #334155;
+    word-break: break-all;
 }
+
 
 .read-more {
     padding: 0.5rem 1rem;
@@ -489,29 +490,58 @@ footer {
     .left-sidebar {
         display: none;
     }
-    @media (max-width: 768px) {
-      .content-wrapper {
-          grid-template-columns: 1fr;
-      }
-      .left-sidebar {
-          display: none;
-      }
-      nav ul {
-          /* REMOVED: flex-direction: column; */ /* Quitamos la dirección de columna */
-          flex-direction: row;        /* Aseguramos la dirección horizontal (aunque es el default de flex) */
-          overflow-x: auto;           /* Permite scroll horizontal si los elementos no caben */
-          white-space: nowrap;        /* Evita que los elementos salten a la siguiente línea */
-          justify-content: flex-start; /* Alinea los items al inicio para el scroll */
-          gap: 1rem;                  /* Puedes ajustar el espacio entre elementos */
-          padding-bottom: 10px;       /* Añade espacio abajo por si aparece la barra de scroll */
-          margin-top: 0.5rem;         /* Ajusta el margen superior si es necesario */
-      }
-      /* Opcional: Podrías querer ajustar el padding de los enlaces en pantallas pequeñas */
-      nav a {
-         padding: 0.4rem 0.8rem;
-      }
+}
+@media (max-width: 768px) {
+  .content-wrapper {
+      grid-template-columns: 1fr;
+      padding: 0;
+  }
+  .left-sidebar {
+      display: none;
+  }
+  nav ul {
+      /* REMOVED: flex-direction: column; */ /* Quitamos la dirección de columna */
+      flex-direction: row;        /* Aseguramos la dirección horizontal (aunque es el default de flex) */
+      overflow-x: auto;           /* Permite scroll horizontal si los elementos no caben */
+      white-space: nowrap;        /* Evita que los elementos salten a la siguiente línea */
+      justify-content: flex-start; /* Alinea los items al inicio para el scroll */
+      gap: 0;                  /* Puedes ajustar el espacio entre elementos */
+      padding-bottom: 10px;       /* Añade espacio abajo por si aparece la barra de scroll */
+      margin-top: 0.5rem;         /* Ajusta el margen superior si es necesario */
+  }
+  /* Opcional: Podrías querer ajustar el padding de los enlaces en pantallas pequeñas */
+  nav a {
+     padding: 0.3rem;
+  }
+
+
+
+  .trix-content figure,
+  .post-content figure {
+      margin: 1rem 0; /* Espacio alrededor de la figura */
+      max-width: 100%;
   }
   
+  .trix-content figure img, /* Ya cubierto arriba, pero para ser explícito */
+  .post-content figure img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+  }
+  
+  .trix-content figcaption,
+  .post-content figcaption {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #64748b; /* O var(--dark-color) con algo de opacidad */
+      margin-top: 0.5rem;
+  }
+  
+  img, pre { /* Más específico */
+    max-width: 350px !important; /* Usar !important como último recurso */
+    height: auto !important;
+    display: block !important;
+  }
 }
 
 /* View Transitions API */
@@ -812,3 +842,5 @@ button[type="submit"]:hover {
   .info-button:hover {
     background-color: #5a6268;
   }
+
+  
