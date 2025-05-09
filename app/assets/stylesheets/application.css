@@ -843,4 +843,23 @@ button[type="submit"]:hover {
     background-color: #5a6268;
   }
 
+  .post-body-truncated {
+    position: relative; /* Necesario para posicionar la máscara */
+    overflow: hidden;
+    height: 1200px; /* Altura fija del contenedor truncado */
+  }
   
+  .post-body-truncated::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px; /* Altura reducida del área de desvanecimiento */
+    background: linear-gradient(to bottom, transparent 0%, white 100%); /* Desvanece hacia blanco */
+  }
+  
+  .post-body-truncated {
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); /* Máscara para WebKit/Blink, desvanecimiento en el último 20% */
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%); /* Máscara estándar */
+  }

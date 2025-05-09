@@ -19,14 +19,13 @@
     </div>
     <%= image_tag post.hero_image, style: 'max-width: 100%' if post.hero_image.attached? %>
     <p class="post-excerpt">
-      <% plain_text = post.body.to_plain_text %>
-      <% if controller.action_name == 'index' and plain_text.length > 700 %>
-        <%= "#{plain_text[0..700]} . . . . . . . " %>
-      <% else %>
-        <%= post.body %>
-      <% end %>
+      <% read_more_text = 'Show More' %>
+      <% read_more_text = 'Read More' if controller.action_name == 'index' and post.body.to_plain_text.length > 700 %>
+        <div class="<%= 'post-body-truncated' if read_more_text == 'Read More' %>">
+          <%= post.body %>
+        </div>
     </p>
-    <a href="<%= post_path(post) %>" class="read-more">Read More</a>
+    <a href="<%= post_path(post) %>" class="read-more"><%= read_more_text %></a>
 
     
     <!-- Comments Section -->
