@@ -155,13 +155,13 @@
       <button class="filter-btn <%= 'active' if @tag == 'all' %>" data-filter="all">All</button>
     <% end %>
     <%= link_to categories_path(tag: 'Popular') do %>
-      <button class="filter-btn <%= 'active' if @tag == 'popular' %>" data-filter="popular">Popular</button>
+      <button class="filter-btn <%= 'active' if @tag == 'Popular' %>" data-filter="popular">Popular</button>
     <% end %>
     <%= link_to categories_path(tag: 'Recent') do %>
-      <button class="filter-btn <%= 'active' if @tag == 'recent' %>" data-filter="recent">Recent</button>
+      <button class="filter-btn <%= 'active' if @tag == 'Recent' %>" data-filter="recent">Recent</button>
     <% end %>
     <%= link_to categories_path(tag: 'Trending') do %>
-      <button class="filter-btn" data-filter="trending">Trending</button>
+      <button class="filter-btn <%= 'active' if @tag == 'Trending' %>"" data-filter="trending">Trending</button>
     <% end %>
   </div>
 
