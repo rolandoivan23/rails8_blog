@@ -1,119 +1,75 @@
 <% content_for :head do %>
   <style>
-    body {
-    margin: 0;
-    font-family: var(--font-family);
-    background-color: var(--light-color);
-    color: var(--dark-color);
-    line-height: 1.6;
-    }
-
-    header {
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    color: white;
-    text-align: center;
-    padding: 2rem 1rem;
-    }
-
-    header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    }
-
-    header p {
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
-    opacity: 0.9;
-    }
-
-    .contact-container {
+    .contact-container { /* Nuevo selector y estructura */
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     padding: 2rem;
     max-width: 1200px;
     margin: auto;
-    }
+}
 
-    .info-section,
-    .form-section {
+.info-section,
+.form-section { /* Nuevos selectores y estructura */
     flex: 1 1 400px;
     background: white;
     padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    }
+    border-radius: var(--border-radius); /* Utiliza una variable para el radio */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Sombra diferente a otros elementos del CSS1 */
+}
 
-    h2 {
+h2 { /* Estilo general para h2, el CSS1 no tiene un h2 genérico */
     color: var(--primary-color);
     margin-top: 0;
     font-size: 1.5rem;
-    }
+}
 
-    .info-section a {
+.info-section a { /* Nuevo selector */
     color: var(--secondary-color);
     text-decoration: none;
     transition: color var(--transition-speed);
-    }
+}
 
-    .info-section a:hover {
+.info-section a:hover { /* Nuevo selector */
     color: var(--accent-color);
     text-decoration: underline;
-    }
+}
 
-    ul {
+ul { /* Estilo general para ul. El CSS1 estiliza `nav ul` y `.user-actions ul` de forma más específica. */
+     /* Esta regla podría afectar a todas las listas no estilizadas previamente. */
     padding-left: 1.2rem;
-    }
+}
 
-    .form-group {
+.form-group { /* Nuevo selector para formularios */
     margin-bottom: 1.5rem;
-    }
+}
 
-    label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    }
+/* `label` ya está estilizado en el CSS1. Esto lo modificaría/complementaría. */
+label {
+    display: block; /* Repetido */
+    font-weight: 600; /* CSS1 usa 'bold', 600 es más específico */
+    margin-bottom: 0.5rem; /* CSS1 usa '5px', 0.5rem es relativo */
+}
 
-    input,
-    textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #cbd5e1;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-    }
+/* `input` y `textarea` ya están estilizados en CSS1 (más específicamente por tipo).
+   Esto es más general y podría sobreescribir o ser base para todos los inputs/textareas. */
+input,
+textarea {
+    width: 100%; /* Repetido */
+    padding: 0.75rem; /* CSS1 usa '8px' */
+    border: 1px solid #cbd5e1; /* CSS1 usa '#ddd' */
+    border-radius: var(--border-radius); /* CSS1 usa '4px', esto usa variable */
+    font-size: 1rem; /* Nueva propiedad para estos elementos */
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed); /* Nuevas transiciones */
+    /* El CSS1 tiene `box-sizing: border-box` y `margin-bottom` para inputs específicos, considera si los necesitas aquí. */
+}
 
-    input:focus,
-    textarea:focus {
+input:focus,
+textarea:focus { /* Nuevos estilos para el foco */
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
     outline: none;
-    }
-
-    button {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
-    }
-
-    button:hover {
-    background-color: #db2777;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column;
-        padding: 1rem;
-    }
-    }
+}
     </style>
 <% end %>
 
