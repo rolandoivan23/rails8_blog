@@ -97,10 +97,20 @@ nav a:hover {
     grid-area: main;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: auto;
     gap: 2rem;
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
+}
+.top-bar {
+  grid-area: top; /* Asignamos su área de grid */
+  display: none;  /* Oculto por defecto en pantallas de escritorio y tablet */
+  background-color: var(--primary-color, #6366f1); /* Color de fondo de ejemplo */
+  color: var(--light-color, #f8fafc); /* Color de texto de ejemplo */
+  padding: 0.75rem 1rem;
+  text-align: center;
+  /* Otros estilos que desees para tu top-bar */
 }
 
 /* Left Sidebar - User Info */
@@ -655,22 +665,99 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    .content-wrapper {
-        grid-template-columns: 1fr;
-    }
-    .left-sidebar {
-        display: none;
-    }
-}
+
 @media (max-width: 768px) {
   .content-wrapper {
-      grid-template-columns: 1fr;
-      padding: 0;
+    grid-template-areas:
+    "top"      /* El .top-bar en la primera fila */
+    "main-col"; /* El .main-content debajo */
+    grid-template-columns: 1fr; /* Una sola columna */
+    grid-template-rows: auto 1fr; /* Fila para .top-bar (altura automática), Fila para .main-content (ocupa el resto) */
+    padding: 0; /* Esto ya lo tenías en tu CSS original */
+    gap: 0; /* Considera si necesitas gap entre el top-bar y el main-content */
   }
   .left-sidebar {
       display: none;
   }
+  .top-bar {
+    /* Estilos existentes del .top-bar */
+    display: flex; /* <--- CAMBIO: Usamos Flexbox para alinear los botones hijos */
+    align-items: stretch; /* Opcional: si los botones deben tener la misma altura */
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background-color: var(--primary-color, #6366f1);
+    padding: 0.75rem; /* Ajusta el padding como necesites. Un padding uniforme puede ser mejor. */
+                      /* Original: padding: 0.75rem 1rem; */
+    /* text-align: center; */ /* Ya no es necesario para la disposición de los botones hijos con Flexbox */
+    gap: 0.5rem;      /* <--- NUEVO: Añade un espacio entre los dos botones (ajusta el valor si lo deseas) */
+                     /* Si no quieres espacio, elimina esta línea o pon gap: 0; */
+  }
+
+  .top-bar .button {
+    flex: 1; /* <--- NUEVO: Esto hace que cada botón ocupe una parte igual del espacio disponible. */
+             /* Es una abreviatura de flex-grow: 1; flex-shrink: 1; flex-basis: 0%; */
+             /* Se distribuirá el espacio restante después de aplicar el 'gap'. */
+
+    
+    text-align: center; /* <--- NUEVO/IMPORTANTE: Asegura que el texto DENTRO de cada botón esté centrado. */
+    margin-right: 0;    /* <--- NUEVO: Anulamos el margin-right de la regla general .button, ya que 'gap' maneja el espaciado. */
+    background-color: var(--light-color);
+    border: 1px solid var(--dark-color);
+    color: var(--dark-color);
+    text-decoration: none;
+  }
+
+  .top-bar .button:hover{
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--light-color);
+    font-weight: bolder;
+  }
+  .top-bar .user-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Mantiene las 3 columnas iguales para los stats */
+    gap: 0.25rem; /* Espacio entre cada .stat, reducido para el top-bar */
+    margin-top: 0; /* Anula el margen superior que tenía .user-stats originalmente */
+    width: 100%;   /* Hace que .user-stats ocupe todo el ancho dentro del padding del .top-bar */
+    padding: 0;    /* Quitamos padding aquí, el espaciado lo maneja .top-bar y el gap de .user-stats */
+    text-align: center; /* Centra el contenido de los items del grid (los .stat) */
+  }
+
+  /* Estilos para cada .stat DENTRO del .top-bar .user-stats */
+  .top-bar .stat {
+    padding: 0.25rem 0.1rem; /* Padding vertical pequeño, horizontal mínimo */
+    display: flex;           /* Usamos flex para centrar el número y la etiqueta verticalmente */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px; /* Asegurar una altura mínima para que se vea bien */
+  }
+
+  /* Estilos para .stat-number DENTRO del .top-bar */
+  .top-bar .stat-number {
+    font-weight: bold;
+    color: var(--light-color); /* CAMBIO CRUCIAL: Para que sea visible sobre el fondo --primary-color del top-bar */
+    font-size: 0.85rem;      /* Reducimos el tamaño de fuente para que quepa mejor */
+    line-height: 1.1;        /* Ajustamos interlineado */
+  }
+
+  /* Estilos para .stat-label DENTRO del .top-bar */
+  .top-bar .stat-label {
+    font-size: 0.6rem;        /* Reducimos significativamente el tamaño de fuente */
+    color: var(--light-color);  /* CAMBIO CRUCIAL: Para que sea visible */
+    opacity: 0.8;               /* Un poco más tenue que el número para diferenciar */
+    line-height: 1;           /* Ajustamos interlineado */
+    text-transform: uppercase;  /* Opcional: para darle un estilo más compacto y uniforme */
+  }
+  .main-content {
+    grid-area: main-col;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 900px;
+}
   nav ul {
       /* REMOVED: flex-direction: column; */ /* Quitamos la dirección de columna */
       flex-direction: row;        /* Aseguramos la dirección horizontal (aunque es el default de flex) */

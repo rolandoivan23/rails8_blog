@@ -52,6 +52,27 @@
     <!-- Main Content Wrapper -->
     <div class="content-wrapper">
         <!-- Left Sidebar - User Information -->
+        <aside class="top-bar">
+            <% if authenticated? %>
+                <div class="user-stats">
+                    <div class="stat">
+                        <div class="stat-number"><%= current_user.posts.count %></div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number"><%= current_user.followers.size %></div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat">
+                        <div id="following-counter" class="stat-number"><%= current_user.following_users.size %></div>
+                        <div class="stat-label">Following</div>
+                    </div>
+                </div>
+            <% else %>
+                <%= link_to 'Login', new_session_path, class: 'button' %>
+                <%= link_to 'Sign Up', new_user_path, class: 'button' %>
+            <% end %>
+        </aside>
         <aside class="left-sidebar">
         <% if authenticated? %>
             <div class="user-profile">
