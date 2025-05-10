@@ -688,11 +688,8 @@ footer {
     top: 0;
     z-index: 9;
     background-color: var(--primary-color, #6366f1);
-    padding: 0.75rem; /* Ajusta el padding como necesites. Un padding uniforme puede ser mejor. */
-                      /* Original: padding: 0.75rem 1rem; */
-    /* text-align: center; */ /* Ya no es necesario para la disposición de los botones hijos con Flexbox */
-    gap: 0.5rem;      /* <--- NUEVO: Añade un espacio entre los dos botones (ajusta el valor si lo deseas) */
-                     /* Si no quieres espacio, elimina esta línea o pon gap: 0; */
+    padding: 0;
+    gap: 0.5rem;
   }
 
   .top-bar .button {
