@@ -105,6 +105,9 @@ nav a:hover {
 
 /* Left Sidebar - User Info */
 .left-sidebar {
+    display: flex; /* Para alinear los botones verticalmente */
+    flex-direction: column; /* Apila los botones uno encima del otro */
+    align-items: center; /* Centra los botones horizontalmente dentro del aside */
     background: white;
     border-radius: 12px;
     padding: 1.5rem;
@@ -118,6 +121,81 @@ nav a:hover {
 .left-sidebar:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.left-sidebar .button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--light-color); /* Texto claro */
+  background-color: var(--primary-color); /* Color primario como base */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 15px 0;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  outline: none;
+  position: relative; /* Necesario para el borde animado */
+  overflow: hidden; /* Para ocultar el borde animado fuera del hover */
+}
+
+.left-sidebar .button:hover {
+  background-color: var(--secondary-color); /* Color secundario al pasar el ratón */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.left-sidebar .button.signup {
+  background-color: var(--light-color); /* Color de acento para "Sign Up" */
+  color: var(--dark-color);
+  border: 1px var(--primary-color) solid; 
+}
+
+.left-sidebar .button.signup:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--accent-color);
+  color: var(--light-color); /* Un tono más oscuro del acento al pasar el ratón */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animación de borde para los botones Login y Sign Up */
+.left-sidebar .button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--primary-color); /* Borde inicial */
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: scale(1.1); /* Inicia ligeramente más grande */
+}
+
+.left-sidebar .button:hover::before {
+  opacity: 1;
+  transform: scale(1); /* Vuelve a su tamaño normal */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.left-sidebar .button.animated {
+  animation: pulse 0.5s alternate;
 }
 
 .user-profile {
@@ -248,13 +326,9 @@ nav a:hover {
 }
 
 
-.read-more {
-    padding: 0.5rem 1rem;
-    float: right;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
+.btn-bk-efct {
+     text-decoration: none;
+ 
     font-weight: 600;
     font-size: 12px;
     transition: all 0.3s ease;
@@ -262,12 +336,12 @@ nav a:hover {
     overflow: hidden;
 }
 
-.read-more:hover {
+.btn-bk-efct:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
 }
 
-.read-more::after {
+.btn-bk-efct::after {
     content: '';
     position: absolute;
     top: 0;
@@ -299,6 +373,66 @@ nav a:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
+
+
+
+
+
+
+
+
+.btn-bk-efct:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-bk-efct::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-bk-efct:hover::after {
+  transform: translateX(100%);
+}
+
+/* Right Sidebar - Related Content */
+.right-sidebar {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.right-sidebar:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .section-title {
     position: relative;
