@@ -1,4 +1,21 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
 <%= form_with model: @user do |form| %>
+
+    <% if @user.errors.any? %>
+        <div id="error_explanation" style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+            <h2>
+                <%= pluralize(@user.errors.count, "error") %>
+                <%= t('activerecord.errors.template.header', count: @user.errors.count, model: t('activerecord.models.user.one'), default: ["prohibió que este #{User.model_name.human.downcase} fuera guardado:", "prohibieron que este #{User.model_name.human.downcase} fuera guardado:"]) %>
+            </h2>
+            <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
     <div>
         <%= form.label :email_address %>
         <%= form.email_field :email_address, class: "form-control", placeholder: "user@example.com" %>

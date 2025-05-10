@@ -26,6 +26,9 @@ class UsersController < ApplicationController
         if @user.save
           start_new_session_for @user
           redirect_to after_authentication_url
+        else
+          flash.now[:alert] = t(".failure", default: "No se pudo crear la cuenta. Por favor, revisa los errores.")
+          render :new, status: :unprocessable_entity
         end
     end
 
@@ -70,6 +73,6 @@ class UsersController < ApplicationController
 
       # Only allow a list of trusted parameters through.
       def user_params
-        params.expect(user: [ :id, :email_address, :password, :presentation, :avatar ])
+        params.expect(user: [ :id, :email_address, :password, :password_confirmation, :presentation, :avatar ])
       end
 end

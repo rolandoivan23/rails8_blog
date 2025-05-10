@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :following_users, foreign_key: :following_user_id
   has_many :following_users_users, through: :following_users, source: :user
 
+  validates_confirmation_of :password
+  validates_presence_of :password_confirmation, if: -> { password.present? } # Para asegurar que se envíe si la contraseña se está estableciendo
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
