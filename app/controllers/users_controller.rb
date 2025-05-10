@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[ new create index ]
+  rescue_from ActiveRecord::RecordNotUnique, with: :handle_record_not_unique
 
   def index
     @users = User.all
@@ -74,5 +75,19 @@ class UsersController < ApplicationController
       # Only allow a list of trusted parameters through.
       def user_params
         params.expect(user: [ :id, :email_address, :password, :password_confirmation, :presentation, :avatar ])
+      end
+
+      def handle_record_not_unique(exception)
+        # Rails.logger.error("Excepción de unicidad de Base de Datos: #{exception.message}")
+
+        # Preparamos el objeto @user para el formulario, si no está ya definido
+        # o si el error ocurrió fuera del flujo normal de @user.save
+        @user ||= User.new(user_params) # Re-construye el usuario con los params si es necesario
+
+        # Añadimos un error específico al campo que causó el problema si es posible,
+        # o un error base. La excepción de DB es menos informativa que la validación de AR.
+        # Para este caso específico, sabemos que es email_address.
+        @user.errors.add(:email_address, :taken, message: t("activerecord.errors.messages.taken_db", default: "ya está registrado."))
+        render :new, status: :unprocessable_entity
       end
 end
