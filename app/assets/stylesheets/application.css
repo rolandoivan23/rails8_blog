@@ -388,6 +388,13 @@ nav a:hover {
   transform: translateX(100%);
 }
 
+.new-post-btn-container {
+  display: flex; 
+  justify-content: center; 
+  margin-top: 15px; 
+  font-weight: bolder;
+}
+
 /* Right Sidebar - Related Content */
 .right-sidebar {
     background: white;
@@ -817,6 +824,27 @@ footer {
     background-color: #d3deff;
   }
 
+  a.sign-out-icon-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex; /* Para alinear el icono */
+    align-items: center; /* Alinea verticalmente */
+    text-decoration: none; /* Quita el subrayado del link */
+  }
+  
+  a.sign-out-icon-button svg.size-6 {
+    height: 1.2em;
+    font-size: 19px;
+  }
+
+   a.sign-out-icon-button svg.size-6:hover {
+    color: var(--accent-color);
+    font-weight: bolder;
+  }
+  
   .new-post-btn {
     background:
     linear-gradient(135deg, #8e2de2, #ff416c);
@@ -837,6 +865,9 @@ footer {
       overflow:
     hidden;
       width: max-content;
+      height: 45px; 
+      font-weight: bolder;
+      font-size: 13px;
   }
 
   /* Estilos para formularios */
