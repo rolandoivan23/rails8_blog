@@ -147,21 +147,21 @@
 <div class="categories-container">
   <h1 class="categories-title">Explore Categories
     <%= link_to new_category_path do %>
-      <button class="filter-btn">+ </button>
+      <button class="filter-btn btn-bk-efct">+ </button>
     <% end %>
   </h1>
   <div class="categories-filter">
     <%= link_to categories_path do %>
-      <button class="filter-btn <%= 'active' if @tag == 'all' %>" data-filter="all">All</button>
+      <button class="filter-btn btn-bk-efct <%= 'active' if @tag == 'all' %>" data-filter="all">All</button>
     <% end %>
     <%= link_to categories_path(tag: 'Popular') do %>
-      <button class="filter-btn <%= 'active' if @tag == 'Popular' %>" data-filter="popular">Popular</button>
+      <button class="filter-btn btn-bk-efct<%= 'active' if @tag == 'Popular' %>" data-filter="popular">Popular</button>
     <% end %>
     <%= link_to categories_path(tag: 'Recent') do %>
-      <button class="filter-btn <%= 'active' if @tag == 'Recent' %>" data-filter="recent">Recent</button>
+      <button class="filter-btn btn-bk-efct<%= 'active' if @tag == 'Recent' %>" data-filter="recent">Recent</button>
     <% end %>
     <%= link_to categories_path(tag: 'Trending') do %>
-      <button class="filter-btn <%= 'active' if @tag == 'Trending' %>"" data-filter="trending">Trending</button>
+      <button class="filter-btn btn-bk-efct<%= 'active' if @tag == 'Trending' %>"" data-filter="trending">Trending</button>
     <% end %>
   </div>
 
