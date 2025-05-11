@@ -59,8 +59,10 @@ class UsersController < ApplicationController
     def follow_user
       user_id = params[:user_id]
       Rails.logger.debug "Received parameterssss: #{params.inspect}"
-      FollowingUser.create! user_id: user_id, following_user_id: current_user.id
-      Follower.create! user_id: current_user.id, follower_id: user_id
+      if FollowingUser.where(user_id: user_id, following_user_id: current_user.id).count == 0
+        FollowingUser.create! user_id: user_id, following_user_id: current_user.id
+        Follower.create! user_id: current_user.id, follower_id: user_id
+      end
       respond_to do
         it.json { head :no_content }
       end

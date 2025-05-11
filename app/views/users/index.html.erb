@@ -1,9 +1,10 @@
 <script>
     async function follow_user(user_id){
-        const url = "/follow_user.json";
         try {
+            document.querySelector(`#user_${user_id} .follow-btn`).remove();
+            const url = "/follow_user.json";
             var token = document.querySelector('meta[name="csrf-token"]').content
-
+            
             const response = await fetch(url, {
                 method: "POST",
                 body:JSON.stringify({user_id: user_id}),
@@ -20,8 +21,9 @@
 
             const json = await response;
             console.log(json)
-            let following_counter = document.querySelector('#following-counter');
-            following_counter.innerHTML = parseInt(following_counter.innerHTML) + 1;
+            let following_counter_elements = document.querySelectorAll('.following-counter');
+            for(element of following_counter_elements)
+                element.innerHTML = parseInt(element.innerHTML) + 1;
             
         } catch (error) {
             console.error(error.message);
@@ -32,14 +34,16 @@
     <div class="user-index-page">
         <div class="user-list-container">
             <ul class="user-list">
-                <li class="user-item">
+                <li id="<%= dom_id(it)%>" class="user-item">
                     <div class="user-info-basic">
                         <span><%= image_tag it.avatar, class: "comment-avatar" if it.avatar.attached?  %></span>
                         <span><%= it.email_address %></span>
                         <p><%= it.presentation %></p>
                         </div>
                     <div class="user-buttons">
-                        <% if current_user %>
+                        <% already_following = current_user.following_users_users.include?(it)%>
+                        <% if authenticated? && current_user.id != it.id && !already_following %>
+
                             <button class="follow-btn" onclick="follow_user(<%= it.id %>)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c0-.001-.001-.048-.064-.208-.303-.631-1.497-1.788-4.936-1.788-3.432 0-4.627 1.148-4.935 1.788-.063.16-.064.207-.064.208z"></path>
@@ -47,6 +51,9 @@
                                 </svg>
                                 Follow
                             </button>
+                        <% end %>
+                        <% if already_following %>
+                            Following
                         <% end %>
                         <div class="user-meta">Joined: <%= it.created_at.strftime("%b %Y") %></div>
                     
