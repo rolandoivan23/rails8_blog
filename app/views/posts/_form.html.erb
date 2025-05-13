@@ -1,3 +1,23 @@
+<style>
+    .field.categories-field h3 {
+    margin-bottom: 7px;
+  }
+  
+  .categories-container {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(150px, auto)); 
+    gap: 10px; 
+  }
+  
+  .category-checkbox {
+    display: flex; 
+    align-items: center; 
+  }
+  
+  .category-checkbox input[type="checkbox"] {
+    margin-right: 5px; 
+  }
+</style>
 <%= form_with(model: post) do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
@@ -20,9 +40,8 @@
     <%= form.label :body, style: "display: block" %>
     <%= form.rich_textarea :body %>
   </div>
-<div>
+  <div>
         <%= form.file_field :hero_image, accept: "image/*" %>
-
   </div>
 
   <div class="field categories-field">
