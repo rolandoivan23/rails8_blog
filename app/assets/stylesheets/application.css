@@ -665,6 +665,36 @@ footer {
     }
 }
 
+.mobile-float-button {
+  display: none; /* Ocultar por defecto en pantallas más grandes */
+  position: fixed; /* Lo fija a la ventana del navegador */
+  top: 80px; /* Ajusta la distancia desde la parte superior */
+  left: 2px; /* Ajusta la distancia desde la derecha */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  background-color: var(--accent-color); /* Usa tu color de acento */
+  color: var(--light-color); /* Texto blanco o claro */
+  border: none;
+  border-radius: 50%; /* Lo hace circular */
+  width: 50px; /* Ajusta el tamaño */
+  height: 50px;
+  font-size: 1.5em;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  align-items: center; /* Centra el icono verticalmente */
+  justify-content: center; /* Centra el icono horizontalmente */
+}
+
+.mobile-float-button:hover {
+  background-color: #d62887; /* Un tono más oscuro del acento al pasar el ratón */
+  transform: scale(1.1);
+}
+
+/* Estilos para el icono SVG (opcional, si usas SVG) */
+.mobile-float-button svg {
+  width: 60%; /* Ajusta el tamaño del icono dentro del botón */
+  height: 60%;
+}
 
 @media (max-width: 768px) {
   .content-wrapper {
@@ -799,6 +829,10 @@ footer {
     max-width: 350px !important; /* Usar !important como último recurso */
     height: auto !important;
     display: block !important;
+  }
+
+  .mobile-float-button {
+    display: flex; /* Mostrar en pantallas más pequeñas */
   }
 }
 
@@ -1216,7 +1250,6 @@ button[type="submit"]:hover {
     .contact-container ul {
     padding-left: 1.2rem;
     }
-
 
 
 
