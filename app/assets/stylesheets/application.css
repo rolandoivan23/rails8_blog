@@ -837,6 +837,10 @@ footer {
   .mobile-float-button {
     display: flex; /* Mostrar en pantallas más pequeñas */
   }
+
+  .link-mobile-float-button{
+    display: block;
+  }
 }
 
 /* View Transitions API */
