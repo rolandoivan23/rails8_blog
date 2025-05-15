@@ -665,6 +665,9 @@ footer {
     }
 }
 
+.link-mobile-float-button{
+  display: none;
+}
 .mobile-float-button {
   display: none; /* Ocultar por defecto en pantallas más grandes */
   position: fixed; /* Lo fija a la ventana del navegador */
