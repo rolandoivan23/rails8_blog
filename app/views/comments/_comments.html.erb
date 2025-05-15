@@ -1,7 +1,9 @@
 
 
 <div id="comments" class="comments-list">
-    <%= render post.comments %>
+    <% if post.comments.size > 0 %>     
+        <%= render post.comments %>
+    <% end %>
 </div>
 <script>
     async function updateLikes(commentId,postId) {

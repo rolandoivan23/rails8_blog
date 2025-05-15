@@ -25,7 +25,9 @@
           <%= post.body %>
         </div>
     </p>
-    <a href="<%= post_path(post) %>" class="read-more"><%= read_more_text %></a>
+    <% if controller.action_name != 'show' %>
+      <a href="<%= post_path(post) %>" class="read-more"><%= read_more_text %></a>
+    <% end %>
 
     
     <!-- Comments Section -->
@@ -35,12 +37,10 @@
           <span id="<%= dom_id(post) %>_comments_count" class="comments-count">
             <%= post.comments.size %>
           </span>
-      </div>
-      <% if post.comments.size > 0 %>             
-        <div style="margin-bottom: 1.5rem;">
-          <%= render "comments/comments", post: post %>
-        </div> 
-      <% end %>
+      </div>        
+      <div style="margin-bottom: 1.5rem;">
+        <%= render "comments/comments", post: post %>
+      </div> 
     </div>
     
     <p>
