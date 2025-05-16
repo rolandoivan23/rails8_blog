@@ -259,6 +259,7 @@ nav a:hover {
 .stat-label {
     font-size: 0.8rem;
     color: #64748b;
+    cursor: pointer;
 }
 
 /* Main Column - Posts */
