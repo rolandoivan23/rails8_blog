@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
 
   def set_followers
-    @followers ||= current_user.followers_users
+    @followers ||= current_user.followers_users if authenticated?
   end
 
   def set_following_users
-    @following_users ||= current_user.following_users_users
+    @following_users ||= current_user.following_users_users if authenticated?
   end
 
   private
