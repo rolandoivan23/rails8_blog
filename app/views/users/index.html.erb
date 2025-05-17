@@ -41,7 +41,7 @@
                         <p><%= it.presentation %></p>
                         </div>
                     <div class="user-buttons">
-                        <% already_following = current_user.following_users_users.include?(it)%>
+                        <% already_following = current_user&.following_users_users&.include?(it)%>
                         <% if authenticated? && current_user.id != it.id && !already_following %>
 
                             <button class="follow-btn" onclick="follow_user(<%= it.id %>)">
