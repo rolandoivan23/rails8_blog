@@ -672,15 +672,15 @@ footer {
 .mobile-float-button {
   display: none; /* Ocultar por defecto en pantallas más grandes */
   position: fixed; /* Lo fija a la ventana del navegador */
-  top: 80px; /* Ajusta la distancia desde la parte superior */
   left: 2px; /* Ajusta la distancia desde la derecha */
   z-index: 1000; /* Asegura que esté por encima de otros elementos */
   background-color: var(--accent-color); /* Usa tu color de acento */
   color: var(--light-color); /* Texto blanco o claro */
   border: none;
   border-radius: 50%; /* Lo hace circular */
-  width: 50px; /* Ajusta el tamaño */
-  height: 50px;
+  top: 61px;
+  height: 43px;
+  width: 43px;
   font-size: 1.5em;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -813,6 +813,12 @@ footer {
       margin: 1rem 0; /* Espacio alrededor de la figura */
       max-width: 100%;
   }
+
+  trix-toolbar{
+    max-width: 320px;
+    overflow-x: scroll;
+    margin-bottom: 7px;
+  }
   
   .trix-content figure img, /* Ya cubierto arriba, pero para ser explícito */
   .post-content figure img {
@@ -836,11 +842,19 @@ footer {
   }
 
   .mobile-float-button {
-    display: flex; /* Mostrar en pantallas más pequeñas */
+    display: flex; 
   }
 
   .link-mobile-float-button{
     display: block;
+  }
+
+  .post-content {
+    padding: 1.5rem 5px;
+  }
+
+  header{
+    padding: 0;
   }
 }
 
