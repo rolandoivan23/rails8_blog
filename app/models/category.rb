@@ -5,4 +5,5 @@ class Category < ApplicationRecord
   end
   has_many :categories_tags
   has_many :tags, through: :categories_tags
+  validates :name, presence: true, uniqueness: true
 end
