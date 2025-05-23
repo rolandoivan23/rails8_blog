@@ -4,7 +4,10 @@ class CommentsController < ApplicationController
 
     def create
         @post.comments.create! params.expect(comment: [ :content ]).merge(user: current_user)
-        redirect_to @post
+        respond_to do |format|
+            format.html { head :created }
+            format.json { render json: @post.comments.last, status: :created }
+        end
     end
 
     def update
