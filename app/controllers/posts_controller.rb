@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.includes(:user, :categories, :comments).with_attached_hero_image.order(id: :desc)
+    @posts = Post.includes(:user, :categories_names, :hero_image_attachment, comments: { user: :avatar_attachment }).order(id: :desc)
   end
 
   # GET /posts/1 or /posts/1.json
