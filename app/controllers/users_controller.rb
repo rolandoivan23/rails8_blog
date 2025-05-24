@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotUnique, with: :handle_record_not_unique
 
   def index
-    @users = User.all
+    @users = User.all.includes(:avatar_attachment, :avatar_blob, :followers, :following_users_users)
   end
 
     # GET /users/1 or /users/1.json

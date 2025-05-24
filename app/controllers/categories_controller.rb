@@ -5,11 +5,11 @@ class CategoriesController < ApplicationController
   # GET /categories or /categories.json
   def index
     if params[:tag].present?
-      @categories = Category.joins(:tags).where(tags: { name: params[:tag] })
+      @categories = Category.joins(:tags).where(tags: { name: params[:tag] }).includes(:tags, :posts, :image_attachment)
       @tag = params[:tag]
     else
       @tag = "all"
-      @categories = Category.all
+      @categories = Category.all.includes(:tags, :posts, :image_attachment)
     end
   end
 
