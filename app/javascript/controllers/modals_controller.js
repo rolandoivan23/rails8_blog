@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="followers"
 export default class extends Controller {
   connect() {
-    console.log("Followers controller connected");
   }
 
   showModal(event) {

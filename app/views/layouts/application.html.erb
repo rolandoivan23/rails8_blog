@@ -51,9 +51,9 @@
     <div id="followersModal" class="modal">
         <div class="modal-content">
             <span class="close-button"  
-                    data-controller="followers" 
-                    data-action="click->followers#closeModal"
-                    data-followers-modal-id-param="followersModal">&times;</span>
+                    data-controller="modals" 
+                    data-action="click->modals#closeModal"
+                    data-modals-modal-id-param="followersModal">&times;</span>
             <h3>Followers</h3>
             <ul id="modalElementsList">
             <% if @followers.present? %>
@@ -70,9 +70,9 @@
     <div id="following-users-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" 
-                data-controller="followers" 
-                data-action="click->followers#closeModal"
-                data-followers-modal-id-param="following-users-modal">&times;</span>
+                data-controller="modals" 
+                data-action="click->modals#closeModal"
+                data-modals-modal-id-param="following-users-modal">&times;</span>
             <h3>Following Users</h3>
             <ul id="modalElementsList">
             <% if @following_users.present? %>
@@ -89,9 +89,9 @@
     <div id="posts-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" 
-                data-controller="followers" 
-                data-action="click->followers#closeModal"
-                data-followers-modal-id-param="posts-modal">&times;</span>
+                data-controller="modals" 
+                data-action="click->modals#closeModal"
+                data-modals-modal-id-param="posts-modal">&times;</span>
             <h3>Posts</h3>
             <ul id="modalElementsList">
             <% if current_user %>
@@ -125,16 +125,16 @@
                     <div class="stat">
                         <div class="stat-number"><%= current_user.followers.size %></div>
                         <div class="stat-label" 
-                             data-controller="followers"
-                             data-action="click->followers#showModal"
-                             data-followers-modal-id-param="followersModal">Followers</div>
+                             data-controller="modals"
+                             data-action="click->modals#showModal"
+                             data-modals-modal-id-param="followersModal">Followers</div>
                     </div>
                     <div class="stat">
                         <div class="stat-number following-counter"><%= current_user.following_users.size %></div>
                         <div class="stat-label" 
-                            data-controller="followers"
-                            data-action="click->followers#showModal"
-                            data-followers-modal-id-param="following-users-modal">Following</div>
+                            data-controller="modals"
+                            data-action="click->modals#showModal"
+                            data-modals-modal-id-param="following-users-modal">Following</div>
                     </div>
                 </div>
             <% else %>
@@ -168,23 +168,23 @@
                 <div class="stat">
                     <div class="stat-number"><%= current_user.posts.count %></div>
                     <div class="stat-label"
-                        data-controller="followers"
-                        data-action="click->followers#showModal"
-                        data-followers-modal-id-param="posts-modal">Posts</div>
+                        data-controller="modals"
+                        data-action="click->modals#showModal"
+                        data-modals-modal-id-param="posts-modal">Posts</div>
                 </div>
                 <div class="stat">
                     <div class="stat-number"><%= current_user.followers.size %></div>
                     <div class="stat-label" 
-                             data-controller="followers"
-                             data-action="click->followers#showModal"
-                             data-followers-modal-id-param="followersModal">Followers</div>
+                             data-controller="modals"
+                             data-action="click->modals#showModal"
+                             data-modals-modal-id-param="followersModal">Followers</div>
                 </div>
                 <div class="stat">
                     <div class="stat-number following-counter"><%= current_user.following_users.size %></div>
                     <div class="stat-label" 
-                        data-controller="followers"
-                        data-action="click->followers#showModal"
-                        data-followers-modal-id-param="following-users-modal">Following</div>
+                        data-controller="modals"
+                        data-action="click->modals#showModal"
+                        data-modals-modal-id-param="following-users-modal">Following</div>
                 </div>
             </div>
 
