@@ -14,4 +14,6 @@ class Post < ApplicationRecord
       end
 
     accepts_nested_attributes_for :categories
+
+    scope :related, -> { select("posts.id, posts.title, posts.created_at") }
 end

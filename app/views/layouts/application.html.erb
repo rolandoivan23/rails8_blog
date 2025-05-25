@@ -95,7 +95,7 @@
             <h3>Posts</h3>
             <ul id="modalElementsList">
             <% if current_user %>
-                <% current_user.posts.each do |post| %>
+                <% current_user.posts_titles.each do |post| %>
                 <li><%= link_to post.title, post_path(post) %></li>
                 <% end %>
             <% else %>
@@ -228,7 +228,7 @@
             <div class="news">
                 <h3 class="section-title">Latest News</h3>
                 <div class="news-items">
-                    <% Bulletin.last(3).each do |bulletin| %>
+                    <% Bulletin.last_news.each do |bulletin| %>
                         <%= link_to bulletin, style: 'text-decoration: none;' do %>
                             <div class="news-item">
                                 <h4 class="news-title"><%= bulletin.title %></h4>

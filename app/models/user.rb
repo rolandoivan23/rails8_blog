@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :sessions, dependent: :destroy
   has_many :posts
+  has_many :posts_titles, -> { select("posts.id, posts.title") }, class_name: "Post"
   has_many :comments
   has_many :followers, foreign_key: :follower_id
   has_many :followers_users, through: :followers, source: :user
