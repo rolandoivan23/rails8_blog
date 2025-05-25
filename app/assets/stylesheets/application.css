@@ -1294,6 +1294,7 @@ button[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     opacity: 1;
+    overflow: hidden;
   }
 
   .modal-content {
@@ -1309,6 +1310,8 @@ button[type="submit"]:hover {
     transform: translateY(-50px);
     opacity: 0;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 80vh;
+    overflow-y: scroll;
   }
 
   .modal.show .modal-content {
