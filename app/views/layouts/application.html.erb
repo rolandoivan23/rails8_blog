@@ -55,7 +55,7 @@
                     data-action="click->followers#closeModal"
                     data-followers-modal-id-param="followersModal">&times;</span>
             <h3>Followers</h3>
-            <ul id="followersList">
+            <ul id="modalElementsList">
             <% if @followers.present? %>
                 <% @followers.each do |follower| %>
                 <li><%= link_to follower.email_address, user_path(follower) %></li>
@@ -74,13 +74,32 @@
                 data-action="click->followers#closeModal"
                 data-followers-modal-id-param="following-users-modal">&times;</span>
             <h3>Following Users</h3>
-            <ul id="followingList">
+            <ul id="modalElementsList">
             <% if @following_users.present? %>
                 <% @following_users.each do |user| %>
                 <li><%= link_to user.email_address, user_path(user) %></li>
                 <% end %>
             <% else %>
                 <p>Aún no sigues a nadie.</p>
+            <% end %>
+            </ul>
+        </div>
+    </div>
+
+    <div id="posts-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" 
+                data-controller="followers" 
+                data-action="click->followers#closeModal"
+                data-followers-modal-id-param="posts-modal">&times;</span>
+            <h3>Posts</h3>
+            <ul id="modalElementsList">
+            <% if current_user %>
+                <% current_user.posts.each do |post| %>
+                <li><%= link_to post.title, post_path(post) %></li>
+                <% end %>
+            <% else %>
+                <p>Aún no has publicado ningun post.</p>
             <% end %>
             </ul>
         </div>
@@ -148,7 +167,10 @@
             <div class="user-stats">
                 <div class="stat">
                     <div class="stat-number"><%= current_user.posts.count %></div>
-                    <div class="stat-label">Posts</div>
+                    <div class="stat-label"
+                        data-controller="followers"
+                        data-action="click->followers#showModal"
+                        data-followers-modal-id-param="posts-modal">Posts</div>
                 </div>
                 <div class="stat">
                     <div class="stat-number"><%= current_user.followers.size %></div>
