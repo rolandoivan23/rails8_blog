@@ -17,7 +17,9 @@
           <% end %>
         </div>
     </div>
-    <%= image_tag post.hero_image, style: 'max-width: 100%' if post.hero_image.attached? %>
+    <div style="display: flex; justify-content:center;">
+      <%= image_tag post.hero_image, style: 'max-width: 100%' if post.hero_image.attached? %>
+    </div>
     <p class="post-excerpt">
       <% read_more_text = 'Show More' %>
       <% read_more_text = 'Read More' if controller.action_name == 'index' and post.body.to_plain_text.length > 700 %>
