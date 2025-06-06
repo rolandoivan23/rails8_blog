@@ -8,8 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create! email_address: 'rolando.vazquez@hey.com', password: '123pum'
-User.create! email_address: 'another@hey.com', password: '123pum'
+User.create! email_address: 'rolando.vazquez@hey.com', password: '123pum', password_confirmation: '123pum'
+User.create! email_address: 'another@hey.com', password: '123pum', password_confirmation: '123pum'
 
 Tag.create! name: 'Popular'
 Tag.create! name: 'Recent'
