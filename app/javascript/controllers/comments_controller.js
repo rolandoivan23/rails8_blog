@@ -14,13 +14,15 @@ export default class extends Controller {
       countElement.textContent = current + 1;
       console.log("Updating comments count to:" + (current + 1));
     }
-    // Limpiar el textarea del comentario
+    // Limpiar el textarea solo cuando el form se haya enviado exitosamente (ajax:success)
     const form = event.target.closest("form");
     if (form) {
-      const textarea = form.querySelector("textarea");
-      if (textarea) textarea.value = "";
+      const clearTextarea = function () {
+        const textarea = form.querySelector("textarea");
+        if (textarea) textarea.value = "";
+        form.removeEventListener("ajax:success", clearTextarea);
+      };
+      form.addEventListener("ajax:success", clearTextarea);
     }
   }
-
-  // ...existing code...
 }
