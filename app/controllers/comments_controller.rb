@@ -30,6 +30,13 @@ class CommentsController < ApplicationController
     end
 
     def destroy
+        if @comment.user_id != current_user.id
+            respond_to do |format|
+                format.html { redirect_to @post, alert: "You are not authorized to delete this comment." }
+                format.json { render json: { error: "Not authorized" }, status: :forbidden }
+            end
+            return
+        end
         @comment.destroy
         respond_to do |format|
             format.html { redirect_to @post, notice: "Comment was successfully destroyed." }
