@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
     before_action :set_post, only: [ :create ]
     before_action :set_comment, only: [ :update, :destroy ]
+    before_action :authorize_comment_owner!, only: [ :destroy ]
 
     def create
         @post.comments.create! params.expect(comment: [ :content ]).merge(user: current_user)
@@ -30,13 +31,6 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        if @comment.user_id != current_user.id
-            respond_to do |format|
-                format.html { redirect_to @post, alert: "You are not authorized to delete this comment." }
-                format.json { render json: { error: "Not authorized" }, status: :forbidden }
-            end
-            return
-        end
         @comment.destroy
         respond_to do |format|
             format.html { redirect_to @post, notice: "Comment was successfully destroyed." }
@@ -52,6 +46,15 @@ class CommentsController < ApplicationController
 
     def set_comment
         @comment = Comment.find(params[:id])
+    end
+
+    def authorize_comment_owner!
+        unless @comment.user_id == current_user.id
+            respond_to do |format|
+                format.html { redirect_to @post, alert: "You are not authorized to delete this comment." }
+                format.json { render json: { error: "Not authorized" }, status: :forbidden }
+            end
+        end
     end
 
     def comment_params
