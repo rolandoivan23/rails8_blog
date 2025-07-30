@@ -16,4 +16,6 @@ class Post < ApplicationRecord
     accepts_nested_attributes_for :categories
 
     scope :related, -> { select("posts.id, posts.title, posts.created_at") }
+
+    validates :title, presence: true
 end
