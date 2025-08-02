@@ -1,4 +1,3 @@
-
 <div id="<%= dom_id(comment)%>" class="comment">
         <% if comment.user.avatar.attached? %>
             <%= image_tag comment.user.avatar.variant(:thumb), class: "comment-avatar" %>
@@ -18,7 +17,9 @@
                 </span>
                 <span class="comment-action">Reply</span>
                 <span class="comment-action">Share</span>
-                <span class="comment-action" onClick="destroyComment(<%= comment.id%>, <%= comment.post.id %>)">Delete</span>
+                <% if current_user == comment.user %>
+                    <span class="comment-action" onClick="destroyComment(<%= comment.id%>, <%= comment.post.id %>)">Delete</span>
+                <% end %>
             </div>
             
             <!-- Nested Comments >
