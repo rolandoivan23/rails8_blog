@@ -6,6 +6,10 @@
   <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
   <%= form.submit "Sign in" %>
 <% end %>
-<br>
 
-<%= link_to "Forgot password?", new_password_path %>
+<div class="forgot-password-link-wrapper">
+  <%= link_to new_password_path, class: "forgot-password-link" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:5px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m0 4a8 8 0 100-16 8 8 0 000 16zm0-6a2 2 0 110-4 2 2 0 010 4z"/></svg>
+    Forgot your password?
+  <% end %>
+</div>
