@@ -1,11 +1,26 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
+<div class="auth-flash-messages">
+  <%= tag.div(flash[:alert], class: "alert-message") if flash[:alert] %>
+  <%= tag.div(flash[:notice], class: "notice-message") if flash[:notice] %>
+</div>
+
+<div class="auth-form-container">
+  <h2 class="auth-form-title">Sign in to your account</h2>
+  <%= form_with url: session_path, html: { class: "auth-form" } do |form| %>
+    <div class="form-group">
+      <%= form.label :email_address, "Email Address", class: "form-label" %>
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "form-input" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :password, "Password", class: "form-label" %>
+      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "form-input" %>
+    </div>
+    <div class="form-actions">
+      <%= form.submit "Sign in", class: "form-submit-btn" %>
+    </div>
+  <% end %>
+</div>
+
 
 <div class="forgot-password-link-wrapper">
   <%= link_to new_password_path, class: "forgot-password-link" do %>
@@ -13,3 +28,101 @@
     Forgot your password?
   <% end %>
 </div>
+
+<style>
+.auth-form-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 32px 28px 24px 28px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.auth-form-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 1.6rem;
+  color: #222;
+  font-weight: 600;
+}
+.form-group {
+  margin-bottom: 18px;
+}
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #444;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border-color 0.2s;
+}
+.form-input:focus {
+  border-color: #6366f1;
+  outline: none;
+  background: #fff;
+}
+.form-actions {
+  text-align: center;
+}
+.form-submit-btn {
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  transition: background 0.2s;
+}
+.form-submit-btn:hover {
+  background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+}
+.forgot-password-link-wrapper {
+  text-align: center;
+  margin-top: 18px;
+}
+.forgot-password-link {
+  color: #6366f1;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.forgot-password-link:hover {
+  color: #374151;
+}
+.auth-flash-messages {
+  max-width: 400px;
+  margin: 0 auto 18px auto;
+}
+.alert-message {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 1rem;
+}
+.notice-message {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 1rem;
+}
+</style>
