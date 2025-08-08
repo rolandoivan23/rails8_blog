@@ -1,62 +1,201 @@
 <style>
-    .field.categories-field h3 {
-    margin-bottom: 7px;
-  }
-  
-  .categories-container {
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(150px, auto)); 
-    gap: 10px; 
-  }
-  
-  .category-checkbox {
-    display: flex; 
-    align-items: center; 
-  }
-  
-  .category-checkbox input[type="checkbox"] {
-    margin-right: 5px; 
-  }
+.post-form-container {
+  max-width: 97%;
+  margin: 40px auto;
+  padding: 36px 32px 28px 32px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+  animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.post-form-title {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 2rem;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.form-group {
+  margin-bottom: 22px;
+  position: relative;
+}
+.form-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #444;
+  font-size: 1.08rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.form-input, .form-rich-text, .form-file-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 7px;
+  font-size: 1.08rem;
+  background: #f9fafb;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.01);
+}
+.form-input:focus, .form-rich-text:focus, .form-file-input:focus {
+  border-color: #6366f1;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+}
+.form-file-input {
+  padding: 8px 0 8px 0;
+  background: #f3f4f6;
+}
+.categories-field h3 {
+  margin-bottom: 10px;
+  color: #6366f1;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+.category-checkbox {
+  display: flex;
+  align-items: center;
+  background: #f3f4f6;
+  border-radius: 5px;
+  padding: 6px 10px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.category-checkbox input[type="checkbox"] {
+  margin-right: 7px;
+  accent-color: #6366f1;
+  transform: scale(1.15);
+  transition: box-shadow 0.2s;
+}
+.category-checkbox:hover {
+  background: #e0e7ff;
+}
+.form-submit-btn {
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 12px 0;
+  width: 100%;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 10px;
+}
+.form-submit-btn:hover {
+  background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+.error-messages {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  border-radius: 7px;
+  padding: 12px 18px;
+  margin-bottom: 18px;
+  text-align: left;
+  font-size: 1rem;
+  animation: fadeInDown 0.6s cubic-bezier(.23,1.01,.32,1) both;
+}
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 </style>
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="post-form-container">
+  <h2 class="post-form-title">Create a New Post</h2>
+  <%= form_with(model: post) do |form| %>
+    <% if post.errors.any? %>
+      <div class="error-messages">
+        <h3><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h3>
+        <ul>
+          <% post.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+    <div class="form-group">
+      <%= form.label :title, "Title", class: "form-label" %>
+      <%= form.text_field :title, class: "form-input", placeholder: "Enter a catchy title", required: true, autofocus: true, maxlength: 120, onfocus: "this.select()" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :body, "Body", class: "form-label" %>
+      <%= form.rich_textarea :body, class: "form-rich-text", placeholder: "Write your story..." %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :hero_image, "Hero Image", class: "form-label" %>
+      <%= form.file_field :hero_image, accept: "image/*", class: "form-file-input", onchange: "previewImage(event)" %>
+      <div id="image-preview" style="margin-top:10px;display:none;">
+        <img id="preview-img" src="#" alt="Image preview" style="max-width:100%;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);transition:opacity 0.3s;opacity:0;" />
+      </div>
+    </div>
+
+    <div class="form-group field categories-field">
+      <h3>Categories</h3>
+      <div class="categories-container">
+        <%= form.collection_check_boxes :category_ids, @categories, :id, :name do |cb| %>
+          <label class="category-checkbox">
+            <%= cb.check_box %>
+            <%= cb.label %>
+          </label>
         <% end %>
-      </ul>
+      </div>
     </div>
+
+    <button type="submit" class="form-submit-btn">
+      <span id="submit-text">Publish Post</span>
+      <span id="submit-spinner" style="display:none;margin-left:10px;vertical-align:middle;">
+        <svg width="20" height="20" viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.415, 31.415" transform="rotate(72.0001 25 25)"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.8s" repeatCount="indefinite"/></circle></svg>
+      </span>
+    </button>
   <% end %>
+</div>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+<script>
+// Image preview animation
+function previewImage(event) {
+  const input = event.target;
+  const previewDiv = document.getElementById('image-preview');
+  const previewImg = document.getElementById('preview-img');
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      previewImg.src = e.target.result;
+      previewDiv.style.display = 'block';
+      setTimeout(() => { previewImg.style.opacity = 1; }, 50);
+    };
+    previewImg.style.opacity = 0;
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    previewDiv.style.display = 'none';
+    previewImg.src = '#';
+    previewImg.style.opacity = 0;
+  }
+}
 
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.rich_textarea :body %>
-  </div>
-  <div>
-        <%= form.file_field :hero_image, accept: "image/*" %>
-  </div>
-
-  <div class="field categories-field">
-    <h3>Categories</h3>
-    <div class="categories-container">
-      <%= form.collection_check_boxes :category_ids, @categories, :id, :name do |cb| %>
-        <div class="category-checkbox">
-          <%= cb.check_box %>
-          <%= cb.label %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+// Submit button animation
+const form = document.querySelector('.post-form-container form');
+if (form) {
+  form.addEventListener('submit', function() {
+    document.getElementById('submit-text').style.display = 'none';
+    document.getElementById('submit-spinner').style.display = 'inline-block';
+  });
+}
+</script>
