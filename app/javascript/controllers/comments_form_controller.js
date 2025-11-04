@@ -42,14 +42,24 @@ export default class extends Controller {
   }
 
   commentTemplate(comment) {
+    const avatarUrl = comment.user.avatar_url ? comment.user.avatar_url : "https://www.claudeusercontent.com/api/placeholder/50/50"
     return `
       <div id="comment_${comment.id}" class="comment">
+        <img class="comment-avatar" src="${avatarUrl}" alt="User">
         <div class="comment-body">
           <div class="comment-header">
             <h4 class="comment-author">${comment.user.email_address}</h4>
             <span class="comment-time">${comment.created_at}</span>
           </div>
           <p class="comment-text">${comment.content}</p>
+          <div class="comment-actions">
+            <span class="comment-action" onclick="updateLikes(${comment.id}, ${comment.post_id})">
+              Like <span id="comment_${comment.id}_likes">(${comment.likes})</span>
+            </span>
+            <span class="comment-action">Reply</span>
+            <span class="comment-action">Share</span>
+            <span class="comment-action" onClick="destroyComment(${comment.id}, ${comment.post_id})">Delete</span>
+          </div>
         </div>
       </div>
     `

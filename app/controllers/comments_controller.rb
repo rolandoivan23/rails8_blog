@@ -5,8 +5,10 @@ class CommentsController < ApplicationController
 
     def create
         @comment = @post.comments.create! params.require(:comment).permit(:content).merge(user: current_user)
-        ActionCable.server.broadcast("post_#{@post.id}", @comment.as_json(include: { user: { only: :email_address } }))
-        render json: @comment.as_json(include: { user: { only: :email_address } })
+        comment_json = @comment.as_json(include: { user: { only: :email_address } })
+        comment_json["user"]["avatar_url"] = url_for(@comment.user.avatar.variant(:thumb)) if @comment.user.avatar.attached?
+        ActionCable.server.broadcast("post_#{@post.id}", comment_json)
+        render json: comment_json
     end
 
     def update
