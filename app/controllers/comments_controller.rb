@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
         respond_to do |format|
             format.html { head :created }
             format.json { render json: @post.comments.last, status: :created }
+            format.turbo_stream
         end
     end
 
