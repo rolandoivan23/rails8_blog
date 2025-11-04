@@ -4,12 +4,9 @@ class CommentsController < ApplicationController
     before_action :authorize_comment_owner!, only: [ :destroy ]
 
     def create
-        @post.comments.create! params.expect(comment: [ :content ]).merge(user: current_user)
-        respond_to do |format|
-            format.html { head :created }
-            format.json { render json: @post.comments.last, status: :created }
-            format.turbo_stream
-        end
+        @comment = @post.comments.create! params.require(:comment).permit(:content).merge(user: current_user)
+        ActionCable.server.broadcast("post_#{@post.id}", @comment.as_json(include: { user: { only: :email_address } }))
+        render json: @comment.as_json(include: { user: { only: :email_address } })
     end
 
     def update
