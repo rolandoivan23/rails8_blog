@@ -7,12 +7,13 @@ image: rolandovazquez/blog
 # Deploy to these servers.
 servers:
   web:
-    - 34.51.43.141
+    - 132.226.123.78
   # job:
   #   hosts:
   #     - 192.168.0.1
   #   cmd: bin/jobs
 
+deploy_timeout: 120
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
 #
@@ -20,6 +21,10 @@ servers:
 proxy:
   ssl: true
   host: blog.mexclouds.com
+  healthcheck:
+    path: /up
+    interval: 3
+    timeout: 5
 
 # Credentials for your image host.
 registry:
@@ -89,7 +94,7 @@ builder:
 
 # Use a different ssh user than root
 ssh:
-   user: vboxuser
+   user: ubuntu
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
